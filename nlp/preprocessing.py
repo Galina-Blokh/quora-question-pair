@@ -1,4 +1,6 @@
 from typing import Iterable
+
+import spacy
 from spacy.lang.en.stop_words import STOP_WORDS as stop_words
 from spacy.lang.en import English
 from string import punctuation as punctuations
@@ -7,7 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import pandas as pd
 from scipy.sparse import coo_matrix
-
+from spacy.util import compile_infix_regex
 from textacy import Corpus
 from textacy import vsm
 
@@ -20,6 +22,9 @@ def nlp_parser():
     if nlp is None:
         nlp = English()
         # nlp.add_pipe()
+        infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
+        infix_re = spacy.util.compile_infix_regex(infixes)
+        nlp.tokenizer = spacy.tokenizer.Tokenizer(nlp.vocab, infix_finditer=infix_re.finditer)
         nlp.max_length = 2_000_000
     return nlp
 
@@ -56,7 +61,7 @@ class TfidfVectorizeEx(TfidfVectorizer):
 
 
 if __name__ == '__main__':
-    sentence = "How does the Surface Pro himself 4 compare with iPad Pro?"
+    sentence = "How does the Surface-Pro himself 4 compare with iPad Pro?"
     tokens = [token for token in spacy_tokenizer(sentence)]
     print(tokens)
     df = pd.read_csv(
