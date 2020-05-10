@@ -16,3 +16,4 @@ pathlib2
 kaggle
 swifter
 spacy
+textacy
