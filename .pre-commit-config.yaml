@@ -3,6 +3,6 @@ repos:
     hooks:
       - id: python-nbconvert
         name: python-nbconvert
-        entry: pre_commit_hook.nbconvert:main
+        entry: python ./pre_commit_hook/nbconvert.py
         language: python
         files: \.ipynb$
