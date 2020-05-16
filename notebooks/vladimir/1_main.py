@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[2]:
 
 
 import os
@@ -16,7 +16,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[5]:
+# In[3]:
 
 
 import os
@@ -25,19 +25,19 @@ sys.path.append(os.path.abspath('../../'))
 from nlp.tokenizer import *
 
 
-# In[2]:
+# In[3]:
 
 
 data_folder = "../../data/raw/"
 
 
-# In[7]:
+# In[4]:
 
 
 get_ipython().system('ls "../"')
 
 
-# In[8]:
+# In[5]:
 
 
 df = pd.read_csv(
@@ -47,14 +47,14 @@ for t in SpacyTokens(corpus).remove(punct):
     print(t)
 
 
-# In[9]:
+# In[6]:
 
 
-for t in SpacyTokens(corpus).remove_all(punct, number):
+for t in SpacyTokens(corpus).remove_all(punct, number).chunk(2):
     print(t)
 
 
-# In[11]:
+# In[7]:
 
 
 for t in SpacyTokens("I go to the supermarket").lemmatize():
@@ -68,7 +68,7 @@ for t in SpacyTokens("I went to the supermarket").lemmatize():
     print(t)
 
 
-# In[15]:
+# In[8]:
 
 
 
@@ -76,9 +76,18 @@ for t in SpacyTokens("London is The Capital Of Great Britain").lower():
     print(t)
 
 
-# In[14]:
+# In[9]:
 
 
 for t in SpacyTokens("ipad 4").remove(regex("\d+")):
+    print(t)
+
+
+# In[10]:
+
+
+from nltk import ngrams
+
+for t in SpacyTokens(corpus).remove_all(punct, number).ngrams(2):
     print(t)
 

@@ -3,6 +3,7 @@ from functools import lru_cache, wraps
 
 import spacy
 from flupy.fluent import Fluent
+from nltk import ngrams
 from spacy.lang.en import English
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
@@ -178,8 +179,6 @@ class SpacyTokens(Fluent):
 
 if __name__ == '__main__':
     from hunspell import Hunspell
-    # remove_all = SpacyTokens("It's good").remove_all(number, punct, regex("\d+"))
-    # j = list(remove_all)
     h = Hunspell()
     d = utils.from_pickle("../data/total_words.pkl")
     hs = {}

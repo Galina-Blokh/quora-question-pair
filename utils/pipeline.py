@@ -3,7 +3,7 @@ from itertools import tee, chain
 
 from flupy import flu
 from flupy.fluent import self_to_flu, Fluent
-from nltk import ngrams
+from nltk import ngrams as nltk_ngrams
 
 class Pipeline:
     pass
@@ -24,6 +24,12 @@ def flat_map(self, func):
 
     return Fluent(_impl())
 
+@self_to_flu
+def ngrams(self, size):
+    def _impl():
+        return nltk_ngrams(self, size)
+
+    return Fluent(_impl())
 
 @self_to_flu
 def prev_curr(self, fill_value=None):
@@ -69,3 +75,4 @@ Pipeline.flat_map = flat_map
 Pipeline.split = split
 Pipeline.remove = remove
 Pipeline.remove_all = remove_all
+Pipeline.ngrams = ngrams

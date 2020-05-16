@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -13098,7 +13098,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -13114,7 +13114,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_folder</span> <span class="o">=</span> <span class="s2">&quot;../../data/raw/&quot;</span>
@@ -13127,7 +13127,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls <span class="s2">&quot;../&quot;</span>
@@ -13158,7 +13158,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -13782,7 +13782,8 @@ sad
 What
 is
 the
-best/most
+best
+most
 memorable
 thing
 you
@@ -14303,7 +14304,10 @@ number
 for
 Skype
 at
-1-855-425-3768
+1
+855
+425
+3768
 always
 busy
 </pre>
@@ -14316,10 +14320,10 @@ busy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SpacyTokens</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">remove_all</span><span class="p">(</span><span class="n">punct</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SpacyTokens</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">remove_all</span><span class="p">(</span><span class="n">punct</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 
@@ -14337,1121 +14341,564 @@ busy
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>What
-is
-the
-step
-by
-step
-guide
-to
-invest
-in
-share
-market
-in
-india
-What
-is
-the
-story
-of
-Kohinoor
-Koh-i-Noor
-Diamond
-How
-can
-I
-increase
-the
-speed
-of
-my
-internet
-connection
-while
-using
-a
-VPN
-Why
-am
-I
-mentally
-very
-lonely
-How
-can
-I
-solve
-it
-Which
-dissolve
-in
-water
-quikly
-sugar
-salt
-methane
-and
-carbon
-di
-oxide
-Astrology
-I
-am
-a
-Capricorn
-Sun
-Cap
-moon
-and
-cap
-rising
-what
-does
-that
-say
-about
-me
-Should
-I
-buy
-tiago
-How
-can
-I
-be
-a
-good
-geologist
-When
-do
-you
-use
-シ
-instead
-of
-し
-Motorola
-company
-Can
-I
-hack
-my
-Charter
-Motorolla
-DCX3400
-Method
-to
-find
-separation
-of
-slits
-using
-fresnel
-biprism
-How
-do
-I
-read
-and
-find
-my
-YouTube
-comments
-What
-can
-make
-Physics
-easy
-to
-learn
-What
-was
-your
-first
-sexual
-experience
-like
-What
-are
-the
-laws
-to
-change
-your
-status
-from
-a
-student
-visa
-to
-a
-green
-card
-in
-the
-US
-how
-do
-they
-compare
-to
-the
-immigration
-laws
-in
-Canada
-What
-would
-a
-Trump
-presidency
-mean
-for
-current
-international
-master
-’s
-students
-on
-an
-F1
-visa
-What
-does
-manipulation
-mean
-Why
-do
-girls
-want
-to
-be
-friends
-with
-the
-guy
-they
-reject
-Why
-are
-so
-many
-Quora
-users
-posting
-questions
-that
-are
-readily
-answered
-on
-Google
-Which
-is
-the
-best
-digital
-marketing
-institution
-in
-banglore
-Why
-do
-rockets
-look
-white
-What
-&#39;s
-causing
-someone
-to
-be
-jealous
-What
-are
-the
-questions
-should
-not
-ask
-on
-Quora
-How
-much
-is
-kV
-in
-HP
-What
-does
-it
-mean
-that
-every
-time
-I
-look
-at
-the
-clock
-the
-numbers
-are
-the
-same
-What
-are
-some
-tips
-on
-making
-it
-through
-the
-job
-interview
-process
-at
-Medicines
-What
-is
-web
-application
-Does
-society
-place
-too
-much
-importance
-on
-sports
-What
-is
-best
-way
-to
-make
-money
-online
-How
-should
-I
-prepare
-for
-CA
-final
-law
-What
-&#39;s
-thing
-you
-would
-like
-to
-do
-better
-What
-are
-some
-special
-cares
-for
-someone
-with
-a
-nose
-that
-gets
-stuffy
-during
-the
-night
-What
-Game
-of
-Thrones
-villain
-would
-be
-the
-most
-likely
-to
-give
-you
-mercy
-Does
-the
-United
-States
-government
-still
-blacklist
-employment
-etc
-some
-United
-States
-citizens
-because
-their
-political
-views
-What
-is
-the
-best
-travel
-website
-in
-spain
-Why
-do
-some
-people
-think
-Obama
-will
-try
-to
-take
-their
-guns
-away
-I
-&#39;m
-a
-19-year-old
-How
-can
-I
-improve
-my
-skills
-or
-what
-should
-I
-do
-to
-become
-an
-entrepreneur
-in
-the
-next
-few
-years
-When
-a
-girlfriend
-asks
-her
-boyfriend
-Why
-did
-you
-choose
-me
-What
-makes
-you
-want
-to
-be
-with
-me
-what
-should
-reply
-to
-her
-How
-do
-we
-prepare
-for
-UPSC
-What
-is
-the
-stall
-speed
-and
-AOA
-of
-an
-f-14
-with
-wings
-fully
-swept
-back
-Why
-do
-Slavs
-squat
-When
-can
-I
-expect
-my
-Cognizant
-confirmation
-mail
-Can
-I
-make
-a
-month
-by
-day
-trading
-Is
-being
-a
-good
-kid
-and
-not
-being
-a
-rebel
-worth
-it
-in
-the
-long
-run
-What
-universities
-does
-Rexnord
-recruit
-new
-grads
-from
-What
-majors
-are
-they
-looking
-for
-What
-is
-the
-quickest
-way
-to
-increase
-Instagram
-followers
-How
-did
-Darth
-Vader
-fought
-Darth
-Maul
-in
-Star
-Wars
-Legends
-What
-are
-the
-stages
-of
-breaking
-up
-between
-couple
-I
-mean
-what
-happens
-after
-the
-breaking
-up
-emotionally
-whether
-its
-a
-male
-or
-female
-What
-are
-some
-examples
-of
-products
-that
-can
-be
-make
-from
-crude
-oil
-How
-do
-I
-make
-friends
-Is
-Career
-Launcher
-good
-for
-RBI
-Grade
-B
-preparation
-Will
-a
-Blu
-Ray
-play
-on
-a
-regular
-DVD
-player
-If
-so
-how
-Nd
-she
-is
-always
-sad
-What
-is
-the
-best/most
-memorable
-thing
-you
-&#39;ve
-ever
-eaten
-and
-why
-How
-GST
-affects
-the
-CAs
-and
-tax
-officers
-How
-difficult
-is
-it
-get
-into
-RSI
-Who
-is
-israil
-friend
-What
-are
-some
-good
-rap
-songs
-to
-dance
-to
-I
-was
-suddenly
-logged
-off
-Gmail
-I
-ca
-n&#39;t
-remember
-my
-Gmail
-password
-and
-just
-realized
-the
-recovery
-email
-is
-no
-longer
-alive
-What
-can
-I
-do
-What
-are
-the
-best
-ways
-to
-learn
-French
-How
-do
-I
-download
-content
-from
-a
-kickass
-torrent
-without
-registration
-Is
-it
-normal
-to
-have
-a
-dark
-ring
-around
-the
-iris
-of
-my
-eye
-How
-is
-the
-new
-Harry
-Potter
-book
-Harry
-Potter
-and
-the
-Cursed
-Child
-Why
-do
-I
-always
-get
-depressed
-Where
-can
-I
-find
-a
-European
-family
-office
-database
-What
-is
-Java
-programming
-How
-To
-Learn
-Java
-Programming
-Language
-What
-is
-the
-best
-book
-ever
-made
-Can
-we
-ever
-store
-energy
-produced
-in
-lightning
-What
-is
-your
-review
-of
-Performance
-Testing
-At
-what
-cost
-does
-so
-much
-privacy
-as
-in
-Germany
-come
-What
-else
-is
-lost
-to
-gain
-so
-much
-privacy
-What
-are
-the
-types
-of
-immunity
-What
-is
-a
-narcissistic
-personality
-disorder
-How
-I
-can
-speak
-English
-fluently
-How
-helpful
-is
-QuickBooks
-auto
-data
-recovery
-support
-phone
-number
-to
-recover
-your
-corrupted
-data
-files
-Who
-is
-the
-richest
-gambler
-of
-all
-time
-and
-how
-can
-I
-reach
-his
-level
-If
-I
-fire
-a
-bullet
-backward
-from
-an
-aircraft
-going
-faster
-than
-the
-bullet
-will
-the
-bullet
-be
-going
-backwards
-How
-do
-I
-prevent
-breast
-cancer
-How
-do
-I
-log
-out
-of
-my
-Gmail
-account
-on
-my
-friend
-&#39;s
-phone
-How
-can
-I
-make
-money
-through
-the
-Internet
-What
-is
-purpose
-of
-life
-When
-will
-the
-BJP
-government
-strip
-all
-the
-Muslims
-and
-the
-Christians
-of
-the
-Indian
-citizenship
-and
-put
-them
-on
-boats
-like
-the
-Rohingya
-&#39;s
-of
-Burma
-What
-is
-the
-right
-etiquette
-for
-wishing
-a
-Jehovah
-Witness
-happy
-birthday
-If
-someone
-wants
-to
-open
-a
-commercial
-FM
-radio
-station
-in
-any
-city
-of
-India
-how
-much
-does
-it
-cost
-and
-what
-is
-the
-procedure
-Why
-do
-Swiss
-despise
-Asians
-What
-are
-some
-of
-the
-high
-salary
-income
-jobs
-in
-the
-field
-of
-biotechnology
-How
-can
-I
-increase
-my
-height
-after
-also
-What
-were
-the
-major
-effects
-of
-the
-cambodia
-earthquake
-and
-how
-do
-these
-effects
-compare
-to
-the
-Kamchatca
-earthquakes
-in
-What
-is
-the
-difference
-between
-sincerity
-and
-fairness
-Which
-is
-the
-best
-gaming
-laptop
-under
-60k
-INR
-What
-is
-your
-review
-of
-The
-Next
-Warrior
-Proving
-Grounds
-Part
-What
-is
-the
-best
-reference
-book
-for
-physics
-class
-11th
-National
-Institute
-of
-Technology
-Kurukshetra
-How
-is
-the
-social
-life
-at
-NITK
-Surathkal
-What
-are
-some
-of
-the
-best
-romantic
-movies
-in
-English
-What
-causes
-a
-nightmare
-What
-is
-abstract
-expressionism
-in
-painting
-How
-does
-3D
-printing
-work
-What
-was
-it
-like
-to
-attend
-Caltech
-with
-Jeremy
-Ehrhardt
-Why
-did
-harry
-become
-a
-horcrux
-What
-are
-the
-best
-associate
-product
-manager
-APM
-programs
-that
-someone
-in
-their
-early
-20s
-can
-join
-to
-learn
-product
-management
-and
-have
-a
-rewarding
-career
-in
-the
-company
-Why
-is
-the
-number
-for
-Skype
-at
-1-855-425-3768
-always
-busy
+<pre>[What, is]
+[the, step]
+[by, step]
+[guide, to]
+[invest, in]
+[share, market]
+[in, india]
+[What, is]
+[the, story]
+[of, Kohinoor]
+[Koh-i-Noor, Diamond]
+[How, can]
+[I, increase]
+[the, speed]
+[of, my]
+[internet, connection]
+[while, using]
+[a, VPN]
+[Why, am]
+[I, mentally]
+[very, lonely]
+[How, can]
+[I, solve]
+[it, Which]
+[dissolve, in]
+[water, quikly]
+[sugar, salt]
+[methane, and]
+[carbon, di]
+[oxide, Astrology]
+[I, am]
+[a, Capricorn]
+[Sun, Cap]
+[moon, and]
+[cap, rising]
+[what, does]
+[that, say]
+[about, me]
+[Should, I]
+[buy, tiago]
+[How, can]
+[I, be]
+[a, good]
+[geologist, When]
+[do, you]
+[use, シ]
+[instead, of]
+[し, Motorola]
+[company, Can]
+[I, hack]
+[my, Charter]
+[Motorolla, DCX3400]
+[Method, to]
+[find, separation]
+[of, slits]
+[using, fresnel]
+[biprism, How]
+[do, I]
+[read, and]
+[find, my]
+[YouTube, comments]
+[What, can]
+[make, Physics]
+[easy, to]
+[learn, What]
+[was, your]
+[first, sexual]
+[experience, like]
+[What, are]
+[the, laws]
+[to, change]
+[your, status]
+[from, a]
+[student, visa]
+[to, a]
+[green, card]
+[in, the]
+[US, how]
+[do, they]
+[compare, to]
+[the, immigration]
+[laws, in]
+[Canada, What]
+[would, a]
+[Trump, presidency]
+[mean, for]
+[current, international]
+[master, ’s]
+[students, on]
+[an, F1]
+[visa, What]
+[does, manipulation]
+[mean, Why]
+[do, girls]
+[want, to]
+[be, friends]
+[with, the]
+[guy, they]
+[reject, Why]
+[are, so]
+[many, Quora]
+[users, posting]
+[questions, that]
+[are, readily]
+[answered, on]
+[Google, Which]
+[is, the]
+[best, digital]
+[marketing, institution]
+[in, banglore]
+[Why, do]
+[rockets, look]
+[white, What]
+[&#39;s, causing]
+[someone, to]
+[be, jealous]
+[What, are]
+[the, questions]
+[should, not]
+[ask, on]
+[Quora, How]
+[much, is]
+[kV, in]
+[HP, What]
+[does, it]
+[mean, that]
+[every, time]
+[I, look]
+[at, the]
+[clock, the]
+[numbers, are]
+[the, same]
+[What, are]
+[some, tips]
+[on, making]
+[it, through]
+[the, job]
+[interview, process]
+[at, Medicines]
+[What, is]
+[web, application]
+[Does, society]
+[place, too]
+[much, importance]
+[on, sports]
+[What, is]
+[best, way]
+[to, make]
+[money, online]
+[How, should]
+[I, prepare]
+[for, CA]
+[final, law]
+[What, &#39;s]
+[thing, you]
+[would, like]
+[to, do]
+[better, What]
+[are, some]
+[special, cares]
+[for, someone]
+[with, a]
+[nose, that]
+[gets, stuffy]
+[during, the]
+[night, What]
+[Game, of]
+[Thrones, villain]
+[would, be]
+[the, most]
+[likely, to]
+[give, you]
+[mercy, Does]
+[the, United]
+[States, government]
+[still, blacklist]
+[employment, etc]
+[some, United]
+[States, citizens]
+[because, their]
+[political, views]
+[What, is]
+[the, best]
+[travel, website]
+[in, spain]
+[Why, do]
+[some, people]
+[think, Obama]
+[will, try]
+[to, take]
+[their, guns]
+[away, I]
+[&#39;m, a]
+[19-year-old, How]
+[can, I]
+[improve, my]
+[skills, or]
+[what, should]
+[I, do]
+[to, become]
+[an, entrepreneur]
+[in, the]
+[next, few]
+[years, When]
+[a, girlfriend]
+[asks, her]
+[boyfriend, Why]
+[did, you]
+[choose, me]
+[What, makes]
+[you, want]
+[to, be]
+[with, me]
+[what, should]
+[reply, to]
+[her, How]
+[do, we]
+[prepare, for]
+[UPSC, What]
+[is, the]
+[stall, speed]
+[and, AOA]
+[of, an]
+[f-14, with]
+[wings, fully]
+[swept, back]
+[Why, do]
+[Slavs, squat]
+[When, can]
+[I, expect]
+[my, Cognizant]
+[confirmation, mail]
+[Can, I]
+[make, a]
+[month, by]
+[day, trading]
+[Is, being]
+[a, good]
+[kid, and]
+[not, being]
+[a, rebel]
+[worth, it]
+[in, the]
+[long, run]
+[What, universities]
+[does, Rexnord]
+[recruit, new]
+[grads, from]
+[What, majors]
+[are, they]
+[looking, for]
+[What, is]
+[the, quickest]
+[way, to]
+[increase, Instagram]
+[followers, How]
+[did, Darth]
+[Vader, fought]
+[Darth, Maul]
+[in, Star]
+[Wars, Legends]
+[What, are]
+[the, stages]
+[of, breaking]
+[up, between]
+[couple, I]
+[mean, what]
+[happens, after]
+[the, breaking]
+[up, emotionally]
+[whether, its]
+[a, male]
+[or, female]
+[What, are]
+[some, examples]
+[of, products]
+[that, can]
+[be, make]
+[from, crude]
+[oil, How]
+[do, I]
+[make, friends]
+[Is, Career]
+[Launcher, good]
+[for, RBI]
+[Grade, B]
+[preparation, Will]
+[a, Blu]
+[Ray, play]
+[on, a]
+[regular, DVD]
+[player, If]
+[so, how]
+[Nd, she]
+[is, always]
+[sad, What]
+[is, the]
+[best, most]
+[memorable, thing]
+[you, &#39;ve]
+[ever, eaten]
+[and, why]
+[How, GST]
+[affects, the]
+[CAs, and]
+[tax, officers]
+[How, difficult]
+[is, it]
+[get, into]
+[RSI, Who]
+[is, israil]
+[friend, What]
+[are, some]
+[good, rap]
+[songs, to]
+[dance, to]
+[I, was]
+[suddenly, logged]
+[off, Gmail]
+[I, ca]
+[n&#39;t, remember]
+[my, Gmail]
+[password, and]
+[just, realized]
+[the, recovery]
+[email, is]
+[no, longer]
+[alive, What]
+[can, I]
+[do, What]
+[are, the]
+[best, ways]
+[to, learn]
+[French, How]
+[do, I]
+[download, content]
+[from, a]
+[kickass, torrent]
+[without, registration]
+[Is, it]
+[normal, to]
+[have, a]
+[dark, ring]
+[around, the]
+[iris, of]
+[my, eye]
+[How, is]
+[the, new]
+[Harry, Potter]
+[book, Harry]
+[Potter, and]
+[the, Cursed]
+[Child, Why]
+[do, I]
+[always, get]
+[depressed, Where]
+[can, I]
+[find, a]
+[European, family]
+[office, database]
+[What, is]
+[Java, programming]
+[How, To]
+[Learn, Java]
+[Programming, Language]
+[What, is]
+[the, best]
+[book, ever]
+[made, Can]
+[we, ever]
+[store, energy]
+[produced, in]
+[lightning, What]
+[is, your]
+[review, of]
+[Performance, Testing]
+[At, what]
+[cost, does]
+[so, much]
+[privacy, as]
+[in, Germany]
+[come, What]
+[else, is]
+[lost, to]
+[gain, so]
+[much, privacy]
+[What, are]
+[the, types]
+[of, immunity]
+[What, is]
+[a, narcissistic]
+[personality, disorder]
+[How, I]
+[can, speak]
+[English, fluently]
+[How, helpful]
+[is, QuickBooks]
+[auto, data]
+[recovery, support]
+[phone, number]
+[to, recover]
+[your, corrupted]
+[data, files]
+[Who, is]
+[the, richest]
+[gambler, of]
+[all, time]
+[and, how]
+[can, I]
+[reach, his]
+[level, If]
+[I, fire]
+[a, bullet]
+[backward, from]
+[an, aircraft]
+[going, faster]
+[than, the]
+[bullet, will]
+[the, bullet]
+[be, going]
+[backwards, How]
+[do, I]
+[prevent, breast]
+[cancer, How]
+[do, I]
+[log, out]
+[of, my]
+[Gmail, account]
+[on, my]
+[friend, &#39;s]
+[phone, How]
+[can, I]
+[make, money]
+[through, the]
+[Internet, What]
+[is, purpose]
+[of, life]
+[When, will]
+[the, BJP]
+[government, strip]
+[all, the]
+[Muslims, and]
+[the, Christians]
+[of, the]
+[Indian, citizenship]
+[and, put]
+[them, on]
+[boats, like]
+[the, Rohingya]
+[&#39;s, of]
+[Burma, What]
+[is, the]
+[right, etiquette]
+[for, wishing]
+[a, Jehovah]
+[Witness, happy]
+[birthday, If]
+[someone, wants]
+[to, open]
+[a, commercial]
+[FM, radio]
+[station, in]
+[any, city]
+[of, India]
+[how, much]
+[does, it]
+[cost, and]
+[what, is]
+[the, procedure]
+[Why, do]
+[Swiss, despise]
+[Asians, What]
+[are, some]
+[of, the]
+[high, salary]
+[income, jobs]
+[in, the]
+[field, of]
+[biotechnology, How]
+[can, I]
+[increase, my]
+[height, after]
+[also, What]
+[were, the]
+[major, effects]
+[of, the]
+[cambodia, earthquake]
+[and, how]
+[do, these]
+[effects, compare]
+[to, the]
+[Kamchatca, earthquakes]
+[in, What]
+[is, the]
+[difference, between]
+[sincerity, and]
+[fairness, Which]
+[is, the]
+[best, gaming]
+[laptop, under]
+[60k, INR]
+[What, is]
+[your, review]
+[of, The]
+[Next, Warrior]
+[Proving, Grounds]
+[Part, What]
+[is, the]
+[best, reference]
+[book, for]
+[physics, class]
+[11th, National]
+[Institute, of]
+[Technology, Kurukshetra]
+[How, is]
+[the, social]
+[life, at]
+[NITK, Surathkal]
+[What, are]
+[some, of]
+[the, best]
+[romantic, movies]
+[in, English]
+[What, causes]
+[a, nightmare]
+[What, is]
+[abstract, expressionism]
+[in, painting]
+[How, does]
+[3D, printing]
+[work, What]
+[was, it]
+[like, to]
+[attend, Caltech]
+[with, Jeremy]
+[Ehrhardt, Why]
+[did, harry]
+[become, a]
+[horcrux, What]
+[are, the]
+[best, associate]
+[product, manager]
+[APM, programs]
+[that, someone]
+[in, their]
+[early, 20s]
+[can, join]
+[to, learn]
+[product, management]
+[and, have]
+[a, rewarding]
+[career, in]
+[the, company]
+[Why, is]
+[the, number]
+[for, Skype]
+[at, always]
+[busy]
 </pre>
 </div>
 </div>
@@ -15462,7 +14909,7 @@ busy
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SpacyTokens</span><span class="p">(</span><span class="s2">&quot;I go to the supermarket&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">():</span>
@@ -15534,7 +14981,7 @@ supermarket
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SpacyTokens</span><span class="p">(</span><span class="s2">&quot;London is The Capital Of Great Britain&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
@@ -15572,7 +15019,7 @@ britain
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SpacyTokens</span><span class="p">(</span><span class="s2">&quot;ipad 4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;\d+&quot;</span><span class="p">)):</span>
@@ -15594,6 +15041,1153 @@ britain
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>ipad
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">ngrams</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SpacyTokens</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">remove_all</span><span class="p">(</span><span class="n">punct</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span><span class="o">.</span><span class="n">ngrams</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(What, is)
+(is, the)
+(the, step)
+(step, by)
+(by, step)
+(step, guide)
+(guide, to)
+(to, invest)
+(invest, in)
+(in, share)
+(share, market)
+(market, in)
+(in, india)
+(india, What)
+(What, is)
+(is, the)
+(the, story)
+(story, of)
+(of, Kohinoor)
+(Kohinoor, Koh-i-Noor)
+(Koh-i-Noor, Diamond)
+(Diamond, How)
+(How, can)
+(can, I)
+(I, increase)
+(increase, the)
+(the, speed)
+(speed, of)
+(of, my)
+(my, internet)
+(internet, connection)
+(connection, while)
+(while, using)
+(using, a)
+(a, VPN)
+(VPN, Why)
+(Why, am)
+(am, I)
+(I, mentally)
+(mentally, very)
+(very, lonely)
+(lonely, How)
+(How, can)
+(can, I)
+(I, solve)
+(solve, it)
+(it, Which)
+(Which, dissolve)
+(dissolve, in)
+(in, water)
+(water, quikly)
+(quikly, sugar)
+(sugar, salt)
+(salt, methane)
+(methane, and)
+(and, carbon)
+(carbon, di)
+(di, oxide)
+(oxide, Astrology)
+(Astrology, I)
+(I, am)
+(am, a)
+(a, Capricorn)
+(Capricorn, Sun)
+(Sun, Cap)
+(Cap, moon)
+(moon, and)
+(and, cap)
+(cap, rising)
+(rising, what)
+(what, does)
+(does, that)
+(that, say)
+(say, about)
+(about, me)
+(me, Should)
+(Should, I)
+(I, buy)
+(buy, tiago)
+(tiago, How)
+(How, can)
+(can, I)
+(I, be)
+(be, a)
+(a, good)
+(good, geologist)
+(geologist, When)
+(When, do)
+(do, you)
+(you, use)
+(use, シ)
+(シ, instead)
+(instead, of)
+(of, し)
+(し, Motorola)
+(Motorola, company)
+(company, Can)
+(Can, I)
+(I, hack)
+(hack, my)
+(my, Charter)
+(Charter, Motorolla)
+(Motorolla, DCX3400)
+(DCX3400, Method)
+(Method, to)
+(to, find)
+(find, separation)
+(separation, of)
+(of, slits)
+(slits, using)
+(using, fresnel)
+(fresnel, biprism)
+(biprism, How)
+(How, do)
+(do, I)
+(I, read)
+(read, and)
+(and, find)
+(find, my)
+(my, YouTube)
+(YouTube, comments)
+(comments, What)
+(What, can)
+(can, make)
+(make, Physics)
+(Physics, easy)
+(easy, to)
+(to, learn)
+(learn, What)
+(What, was)
+(was, your)
+(your, first)
+(first, sexual)
+(sexual, experience)
+(experience, like)
+(like, What)
+(What, are)
+(are, the)
+(the, laws)
+(laws, to)
+(to, change)
+(change, your)
+(your, status)
+(status, from)
+(from, a)
+(a, student)
+(student, visa)
+(visa, to)
+(to, a)
+(a, green)
+(green, card)
+(card, in)
+(in, the)
+(the, US)
+(US, how)
+(how, do)
+(do, they)
+(they, compare)
+(compare, to)
+(to, the)
+(the, immigration)
+(immigration, laws)
+(laws, in)
+(in, Canada)
+(Canada, What)
+(What, would)
+(would, a)
+(a, Trump)
+(Trump, presidency)
+(presidency, mean)
+(mean, for)
+(for, current)
+(current, international)
+(international, master)
+(master, ’s)
+(’s, students)
+(students, on)
+(on, an)
+(an, F1)
+(F1, visa)
+(visa, What)
+(What, does)
+(does, manipulation)
+(manipulation, mean)
+(mean, Why)
+(Why, do)
+(do, girls)
+(girls, want)
+(want, to)
+(to, be)
+(be, friends)
+(friends, with)
+(with, the)
+(the, guy)
+(guy, they)
+(they, reject)
+(reject, Why)
+(Why, are)
+(are, so)
+(so, many)
+(many, Quora)
+(Quora, users)
+(users, posting)
+(posting, questions)
+(questions, that)
+(that, are)
+(are, readily)
+(readily, answered)
+(answered, on)
+(on, Google)
+(Google, Which)
+(Which, is)
+(is, the)
+(the, best)
+(best, digital)
+(digital, marketing)
+(marketing, institution)
+(institution, in)
+(in, banglore)
+(banglore, Why)
+(Why, do)
+(do, rockets)
+(rockets, look)
+(look, white)
+(white, What)
+(What, &#39;s)
+(&#39;s, causing)
+(causing, someone)
+(someone, to)
+(to, be)
+(be, jealous)
+(jealous, What)
+(What, are)
+(are, the)
+(the, questions)
+(questions, should)
+(should, not)
+(not, ask)
+(ask, on)
+(on, Quora)
+(Quora, How)
+(How, much)
+(much, is)
+(is, kV)
+(kV, in)
+(in, HP)
+(HP, What)
+(What, does)
+(does, it)
+(it, mean)
+(mean, that)
+(that, every)
+(every, time)
+(time, I)
+(I, look)
+(look, at)
+(at, the)
+(the, clock)
+(clock, the)
+(the, numbers)
+(numbers, are)
+(are, the)
+(the, same)
+(same, What)
+(What, are)
+(are, some)
+(some, tips)
+(tips, on)
+(on, making)
+(making, it)
+(it, through)
+(through, the)
+(the, job)
+(job, interview)
+(interview, process)
+(process, at)
+(at, Medicines)
+(Medicines, What)
+(What, is)
+(is, web)
+(web, application)
+(application, Does)
+(Does, society)
+(society, place)
+(place, too)
+(too, much)
+(much, importance)
+(importance, on)
+(on, sports)
+(sports, What)
+(What, is)
+(is, best)
+(best, way)
+(way, to)
+(to, make)
+(make, money)
+(money, online)
+(online, How)
+(How, should)
+(should, I)
+(I, prepare)
+(prepare, for)
+(for, CA)
+(CA, final)
+(final, law)
+(law, What)
+(What, &#39;s)
+(&#39;s, thing)
+(thing, you)
+(you, would)
+(would, like)
+(like, to)
+(to, do)
+(do, better)
+(better, What)
+(What, are)
+(are, some)
+(some, special)
+(special, cares)
+(cares, for)
+(for, someone)
+(someone, with)
+(with, a)
+(a, nose)
+(nose, that)
+(that, gets)
+(gets, stuffy)
+(stuffy, during)
+(during, the)
+(the, night)
+(night, What)
+(What, Game)
+(Game, of)
+(of, Thrones)
+(Thrones, villain)
+(villain, would)
+(would, be)
+(be, the)
+(the, most)
+(most, likely)
+(likely, to)
+(to, give)
+(give, you)
+(you, mercy)
+(mercy, Does)
+(Does, the)
+(the, United)
+(United, States)
+(States, government)
+(government, still)
+(still, blacklist)
+(blacklist, employment)
+(employment, etc)
+(etc, some)
+(some, United)
+(United, States)
+(States, citizens)
+(citizens, because)
+(because, their)
+(their, political)
+(political, views)
+(views, What)
+(What, is)
+(is, the)
+(the, best)
+(best, travel)
+(travel, website)
+(website, in)
+(in, spain)
+(spain, Why)
+(Why, do)
+(do, some)
+(some, people)
+(people, think)
+(think, Obama)
+(Obama, will)
+(will, try)
+(try, to)
+(to, take)
+(take, their)
+(their, guns)
+(guns, away)
+(away, I)
+(I, &#39;m)
+(&#39;m, a)
+(a, 19-year-old)
+(19-year-old, How)
+(How, can)
+(can, I)
+(I, improve)
+(improve, my)
+(my, skills)
+(skills, or)
+(or, what)
+(what, should)
+(should, I)
+(I, do)
+(do, to)
+(to, become)
+(become, an)
+(an, entrepreneur)
+(entrepreneur, in)
+(in, the)
+(the, next)
+(next, few)
+(few, years)
+(years, When)
+(When, a)
+(a, girlfriend)
+(girlfriend, asks)
+(asks, her)
+(her, boyfriend)
+(boyfriend, Why)
+(Why, did)
+(did, you)
+(you, choose)
+(choose, me)
+(me, What)
+(What, makes)
+(makes, you)
+(you, want)
+(want, to)
+(to, be)
+(be, with)
+(with, me)
+(me, what)
+(what, should)
+(should, reply)
+(reply, to)
+(to, her)
+(her, How)
+(How, do)
+(do, we)
+(we, prepare)
+(prepare, for)
+(for, UPSC)
+(UPSC, What)
+(What, is)
+(is, the)
+(the, stall)
+(stall, speed)
+(speed, and)
+(and, AOA)
+(AOA, of)
+(of, an)
+(an, f-14)
+(f-14, with)
+(with, wings)
+(wings, fully)
+(fully, swept)
+(swept, back)
+(back, Why)
+(Why, do)
+(do, Slavs)
+(Slavs, squat)
+(squat, When)
+(When, can)
+(can, I)
+(I, expect)
+(expect, my)
+(my, Cognizant)
+(Cognizant, confirmation)
+(confirmation, mail)
+(mail, Can)
+(Can, I)
+(I, make)
+(make, a)
+(a, month)
+(month, by)
+(by, day)
+(day, trading)
+(trading, Is)
+(Is, being)
+(being, a)
+(a, good)
+(good, kid)
+(kid, and)
+(and, not)
+(not, being)
+(being, a)
+(a, rebel)
+(rebel, worth)
+(worth, it)
+(it, in)
+(in, the)
+(the, long)
+(long, run)
+(run, What)
+(What, universities)
+(universities, does)
+(does, Rexnord)
+(Rexnord, recruit)
+(recruit, new)
+(new, grads)
+(grads, from)
+(from, What)
+(What, majors)
+(majors, are)
+(are, they)
+(they, looking)
+(looking, for)
+(for, What)
+(What, is)
+(is, the)
+(the, quickest)
+(quickest, way)
+(way, to)
+(to, increase)
+(increase, Instagram)
+(Instagram, followers)
+(followers, How)
+(How, did)
+(did, Darth)
+(Darth, Vader)
+(Vader, fought)
+(fought, Darth)
+(Darth, Maul)
+(Maul, in)
+(in, Star)
+(Star, Wars)
+(Wars, Legends)
+(Legends, What)
+(What, are)
+(are, the)
+(the, stages)
+(stages, of)
+(of, breaking)
+(breaking, up)
+(up, between)
+(between, couple)
+(couple, I)
+(I, mean)
+(mean, what)
+(what, happens)
+(happens, after)
+(after, the)
+(the, breaking)
+(breaking, up)
+(up, emotionally)
+(emotionally, whether)
+(whether, its)
+(its, a)
+(a, male)
+(male, or)
+(or, female)
+(female, What)
+(What, are)
+(are, some)
+(some, examples)
+(examples, of)
+(of, products)
+(products, that)
+(that, can)
+(can, be)
+(be, make)
+(make, from)
+(from, crude)
+(crude, oil)
+(oil, How)
+(How, do)
+(do, I)
+(I, make)
+(make, friends)
+(friends, Is)
+(Is, Career)
+(Career, Launcher)
+(Launcher, good)
+(good, for)
+(for, RBI)
+(RBI, Grade)
+(Grade, B)
+(B, preparation)
+(preparation, Will)
+(Will, a)
+(a, Blu)
+(Blu, Ray)
+(Ray, play)
+(play, on)
+(on, a)
+(a, regular)
+(regular, DVD)
+(DVD, player)
+(player, If)
+(If, so)
+(so, how)
+(how, Nd)
+(Nd, she)
+(she, is)
+(is, always)
+(always, sad)
+(sad, What)
+(What, is)
+(is, the)
+(the, best)
+(best, most)
+(most, memorable)
+(memorable, thing)
+(thing, you)
+(you, &#39;ve)
+(&#39;ve, ever)
+(ever, eaten)
+(eaten, and)
+(and, why)
+(why, How)
+(How, GST)
+(GST, affects)
+(affects, the)
+(the, CAs)
+(CAs, and)
+(and, tax)
+(tax, officers)
+(officers, How)
+(How, difficult)
+(difficult, is)
+(is, it)
+(it, get)
+(get, into)
+(into, RSI)
+(RSI, Who)
+(Who, is)
+(is, israil)
+(israil, friend)
+(friend, What)
+(What, are)
+(are, some)
+(some, good)
+(good, rap)
+(rap, songs)
+(songs, to)
+(to, dance)
+(dance, to)
+(to, I)
+(I, was)
+(was, suddenly)
+(suddenly, logged)
+(logged, off)
+(off, Gmail)
+(Gmail, I)
+(I, ca)
+(ca, n&#39;t)
+(n&#39;t, remember)
+(remember, my)
+(my, Gmail)
+(Gmail, password)
+(password, and)
+(and, just)
+(just, realized)
+(realized, the)
+(the, recovery)
+(recovery, email)
+(email, is)
+(is, no)
+(no, longer)
+(longer, alive)
+(alive, What)
+(What, can)
+(can, I)
+(I, do)
+(do, What)
+(What, are)
+(are, the)
+(the, best)
+(best, ways)
+(ways, to)
+(to, learn)
+(learn, French)
+(French, How)
+(How, do)
+(do, I)
+(I, download)
+(download, content)
+(content, from)
+(from, a)
+(a, kickass)
+(kickass, torrent)
+(torrent, without)
+(without, registration)
+(registration, Is)
+(Is, it)
+(it, normal)
+(normal, to)
+(to, have)
+(have, a)
+(a, dark)
+(dark, ring)
+(ring, around)
+(around, the)
+(the, iris)
+(iris, of)
+(of, my)
+(my, eye)
+(eye, How)
+(How, is)
+(is, the)
+(the, new)
+(new, Harry)
+(Harry, Potter)
+(Potter, book)
+(book, Harry)
+(Harry, Potter)
+(Potter, and)
+(and, the)
+(the, Cursed)
+(Cursed, Child)
+(Child, Why)
+(Why, do)
+(do, I)
+(I, always)
+(always, get)
+(get, depressed)
+(depressed, Where)
+(Where, can)
+(can, I)
+(I, find)
+(find, a)
+(a, European)
+(European, family)
+(family, office)
+(office, database)
+(database, What)
+(What, is)
+(is, Java)
+(Java, programming)
+(programming, How)
+(How, To)
+(To, Learn)
+(Learn, Java)
+(Java, Programming)
+(Programming, Language)
+(Language, What)
+(What, is)
+(is, the)
+(the, best)
+(best, book)
+(book, ever)
+(ever, made)
+(made, Can)
+(Can, we)
+(we, ever)
+(ever, store)
+(store, energy)
+(energy, produced)
+(produced, in)
+(in, lightning)
+(lightning, What)
+(What, is)
+(is, your)
+(your, review)
+(review, of)
+(of, Performance)
+(Performance, Testing)
+(Testing, At)
+(At, what)
+(what, cost)
+(cost, does)
+(does, so)
+(so, much)
+(much, privacy)
+(privacy, as)
+(as, in)
+(in, Germany)
+(Germany, come)
+(come, What)
+(What, else)
+(else, is)
+(is, lost)
+(lost, to)
+(to, gain)
+(gain, so)
+(so, much)
+(much, privacy)
+(privacy, What)
+(What, are)
+(are, the)
+(the, types)
+(types, of)
+(of, immunity)
+(immunity, What)
+(What, is)
+(is, a)
+(a, narcissistic)
+(narcissistic, personality)
+(personality, disorder)
+(disorder, How)
+(How, I)
+(I, can)
+(can, speak)
+(speak, English)
+(English, fluently)
+(fluently, How)
+(How, helpful)
+(helpful, is)
+(is, QuickBooks)
+(QuickBooks, auto)
+(auto, data)
+(data, recovery)
+(recovery, support)
+(support, phone)
+(phone, number)
+(number, to)
+(to, recover)
+(recover, your)
+(your, corrupted)
+(corrupted, data)
+(data, files)
+(files, Who)
+(Who, is)
+(is, the)
+(the, richest)
+(richest, gambler)
+(gambler, of)
+(of, all)
+(all, time)
+(time, and)
+(and, how)
+(how, can)
+(can, I)
+(I, reach)
+(reach, his)
+(his, level)
+(level, If)
+(If, I)
+(I, fire)
+(fire, a)
+(a, bullet)
+(bullet, backward)
+(backward, from)
+(from, an)
+(an, aircraft)
+(aircraft, going)
+(going, faster)
+(faster, than)
+(than, the)
+(the, bullet)
+(bullet, will)
+(will, the)
+(the, bullet)
+(bullet, be)
+(be, going)
+(going, backwards)
+(backwards, How)
+(How, do)
+(do, I)
+(I, prevent)
+(prevent, breast)
+(breast, cancer)
+(cancer, How)
+(How, do)
+(do, I)
+(I, log)
+(log, out)
+(out, of)
+(of, my)
+(my, Gmail)
+(Gmail, account)
+(account, on)
+(on, my)
+(my, friend)
+(friend, &#39;s)
+(&#39;s, phone)
+(phone, How)
+(How, can)
+(can, I)
+(I, make)
+(make, money)
+(money, through)
+(through, the)
+(the, Internet)
+(Internet, What)
+(What, is)
+(is, purpose)
+(purpose, of)
+(of, life)
+(life, When)
+(When, will)
+(will, the)
+(the, BJP)
+(BJP, government)
+(government, strip)
+(strip, all)
+(all, the)
+(the, Muslims)
+(Muslims, and)
+(and, the)
+(the, Christians)
+(Christians, of)
+(of, the)
+(the, Indian)
+(Indian, citizenship)
+(citizenship, and)
+(and, put)
+(put, them)
+(them, on)
+(on, boats)
+(boats, like)
+(like, the)
+(the, Rohingya)
+(Rohingya, &#39;s)
+(&#39;s, of)
+(of, Burma)
+(Burma, What)
+(What, is)
+(is, the)
+(the, right)
+(right, etiquette)
+(etiquette, for)
+(for, wishing)
+(wishing, a)
+(a, Jehovah)
+(Jehovah, Witness)
+(Witness, happy)
+(happy, birthday)
+(birthday, If)
+(If, someone)
+(someone, wants)
+(wants, to)
+(to, open)
+(open, a)
+(a, commercial)
+(commercial, FM)
+(FM, radio)
+(radio, station)
+(station, in)
+(in, any)
+(any, city)
+(city, of)
+(of, India)
+(India, how)
+(how, much)
+(much, does)
+(does, it)
+(it, cost)
+(cost, and)
+(and, what)
+(what, is)
+(is, the)
+(the, procedure)
+(procedure, Why)
+(Why, do)
+(do, Swiss)
+(Swiss, despise)
+(despise, Asians)
+(Asians, What)
+(What, are)
+(are, some)
+(some, of)
+(of, the)
+(the, high)
+(high, salary)
+(salary, income)
+(income, jobs)
+(jobs, in)
+(in, the)
+(the, field)
+(field, of)
+(of, biotechnology)
+(biotechnology, How)
+(How, can)
+(can, I)
+(I, increase)
+(increase, my)
+(my, height)
+(height, after)
+(after, also)
+(also, What)
+(What, were)
+(were, the)
+(the, major)
+(major, effects)
+(effects, of)
+(of, the)
+(the, cambodia)
+(cambodia, earthquake)
+(earthquake, and)
+(and, how)
+(how, do)
+(do, these)
+(these, effects)
+(effects, compare)
+(compare, to)
+(to, the)
+(the, Kamchatca)
+(Kamchatca, earthquakes)
+(earthquakes, in)
+(in, What)
+(What, is)
+(is, the)
+(the, difference)
+(difference, between)
+(between, sincerity)
+(sincerity, and)
+(and, fairness)
+(fairness, Which)
+(Which, is)
+(is, the)
+(the, best)
+(best, gaming)
+(gaming, laptop)
+(laptop, under)
+(under, 60k)
+(60k, INR)
+(INR, What)
+(What, is)
+(is, your)
+(your, review)
+(review, of)
+(of, The)
+(The, Next)
+(Next, Warrior)
+(Warrior, Proving)
+(Proving, Grounds)
+(Grounds, Part)
+(Part, What)
+(What, is)
+(is, the)
+(the, best)
+(best, reference)
+(reference, book)
+(book, for)
+(for, physics)
+(physics, class)
+(class, 11th)
+(11th, National)
+(National, Institute)
+(Institute, of)
+(of, Technology)
+(Technology, Kurukshetra)
+(Kurukshetra, How)
+(How, is)
+(is, the)
+(the, social)
+(social, life)
+(life, at)
+(at, NITK)
+(NITK, Surathkal)
+(Surathkal, What)
+(What, are)
+(are, some)
+(some, of)
+(of, the)
+(the, best)
+(best, romantic)
+(romantic, movies)
+(movies, in)
+(in, English)
+(English, What)
+(What, causes)
+(causes, a)
+(a, nightmare)
+(nightmare, What)
+(What, is)
+(is, abstract)
+(abstract, expressionism)
+(expressionism, in)
+(in, painting)
+(painting, How)
+(How, does)
+(does, 3D)
+(3D, printing)
+(printing, work)
+(work, What)
+(What, was)
+(was, it)
+(it, like)
+(like, to)
+(to, attend)
+(attend, Caltech)
+(Caltech, with)
+(with, Jeremy)
+(Jeremy, Ehrhardt)
+(Ehrhardt, Why)
+(Why, did)
+(did, harry)
+(harry, become)
+(become, a)
+(a, horcrux)
+(horcrux, What)
+(What, are)
+(are, the)
+(the, best)
+(best, associate)
+(associate, product)
+(product, manager)
+(manager, APM)
+(APM, programs)
+(programs, that)
+(that, someone)
+(someone, in)
+(in, their)
+(their, early)
+(early, 20s)
+(20s, can)
+(can, join)
+(join, to)
+(to, learn)
+(learn, product)
+(product, management)
+(management, and)
+(and, have)
+(have, a)
+(a, rewarding)
+(rewarding, career)
+(career, in)
+(in, the)
+(the, company)
+(company, Why)
+(Why, is)
+(is, the)
+(the, number)
+(number, for)
+(for, Skype)
+(Skype, at)
+(at, always)
+(always, busy)
 </pre>
 </div>
 </div>
