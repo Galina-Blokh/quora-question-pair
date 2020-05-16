@@ -30,7 +30,7 @@ def nlp_parser(name="en_core_web_md") -> Language:
     global nlp
     if nlp is None:
         try:
-            nlp = English()#spacy.load(name)
+            nlp = spacy.load(name)
         except:
             nlp = en_core_web_md.load()
         infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
@@ -56,7 +56,9 @@ class SpacyTokenizer(Tokenizer):
             nlp = nlp_parser()
         cls = nlp.Defaults
         nlp.Defaults.stop_words |= {"a"}
-        nlp.Defaults.stop_words -= {"who", "what", "when", "where", "why", "how", "there", "that"}
+        # https://en.wikipedia.org/wiki/Interrogative_word
+        nlp.Defaults.stop_words -= {"who", "whom", "whose", "what", "when", "where", "why", "how",
+                                    "there", "that", "which", "whose", "whither", "whence", "whether", "whatsoever"}
         rules = cls.tokenizer_exceptions
         token_match = cls.token_match
         prefix_search = (
