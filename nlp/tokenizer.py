@@ -1,5 +1,6 @@
 import re
 from functools import lru_cache, wraps
+from itertools import chain
 
 import spacy
 from flupy.fluent import self_to_flu, Fluent, flu
@@ -82,7 +83,8 @@ class SpacyTokens(Fluent):
     def __init__(self, iterable):
         if isinstance(iterable, str):
             iterable = (t for t in SpacyTokenizer.from_lang()(iterable))
-        super(SpacyTokens, self).__init__(iterable)
+        else:
+            super(SpacyTokens, self).__init__(chain.from_iterable(map(SpacyTokenizer.from_lang(), iterable)))
 
     @staticmethod
     def to_token(string):
@@ -123,7 +125,12 @@ class SpacyTokens(Fluent):
         return SpacyTokens(_impl())
 
 if __name__ == '__main__':
-    remove_all = SpacyTokens("I gave 42 (ipad-4)").remove_all(number, punct, regex("\d+"))
-    j = list(remove_all.lemmatize())
-    for t in j:
-        print(t)
+    # remove_all = SpacyTokens("It's good").remove_all(number, punct, regex("\d+"))
+    # j = list(remove_all)
+    import pandas as pd
+    df = pd.read_csv(
+        "../notebooks/maria/train_dup.csv").drop_duplicates().dropna()
+    corpus = pd.concat([df['question1'], df['question2']]).unique()
+
+
+
