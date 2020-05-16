@@ -9,14 +9,22 @@ from spacy.language import Language
 from spacy.tokenizer import Tokenizer
 from spacy.tokens import Doc, Token
 
+import utils
 from utils.pipeline import Pipeline
 
 space = lambda t: t.is_space
-punct = lambda t: t.is_punct
+
+
+def punct(t):
+    return t.is_punct
+
+
+# punct = lambda t: t.is_punct
 stop = lambda t: t.is_stop
 number = lambda t: t.like_num
 
 nlp = None
+
 
 @lru_cache(10)
 def nlp_parser(name="en_core_web_md") -> Language:
@@ -40,6 +48,7 @@ class SpacyTokenizer(Tokenizer):
         return Pipeline(Tokenizer.__call__(self, *args, **kwargs))
 
     @staticmethod
+    @lru_cache(10)
     def from_lang(nlp=None):
         if nlp is None:
             nlp = nlp_parser()
@@ -65,6 +74,7 @@ class SpacyTokenizer(Tokenizer):
             token_match=token_match,
         )
 
+
 def self_to_spacy_tokens(func):
     """Decorates class method to first argument to a Fluent"""
 
@@ -75,16 +85,27 @@ def self_to_spacy_tokens(func):
 
     return wrapper
 
+
 def regex(pattern):
     return lambda t: re.match(pattern, t.text) is not None
+
 
 class SpacyTokens(Fluent):
 
     def __init__(self, iterable):
         if isinstance(iterable, str):
             iterable = (t for t in SpacyTokenizer.from_lang()(iterable))
+            super(SpacyTokens, self).__init__(iterable)
         else:
-            super(SpacyTokens, self).__init__(chain.from_iterable(map(SpacyTokenizer.from_lang(), iterable)))
+            iterator = iter(self.create_iter(iterable))
+            self._iterator = iterator
+
+    def create_iter(self, iterable):
+        for i in iterable:
+            if isinstance(i, Token):
+                yield i
+            else:
+                yield from (t for t in SpacyTokenizer.from_lang()(i))
 
     @staticmethod
     def to_token(string):
@@ -115,6 +136,7 @@ class SpacyTokens(Fluent):
     def lemmatize(self):
         def _impl():
             yield from self.map(lambda t: SpacyTokens.to_token(t.lemma_))
+
         return SpacyTokens(_impl())
 
     @self_to_spacy_tokens
@@ -124,13 +146,18 @@ class SpacyTokens(Fluent):
 
         return SpacyTokens(_impl())
 
+
 if __name__ == '__main__':
     # remove_all = SpacyTokens("It's good").remove_all(number, punct, regex("\d+"))
     # j = list(remove_all)
+    corpus = ["test test", "test"]
+    d = list(SpacyTokens(corpus).remove(punct))
     import pandas as pd
+
     df = pd.read_csv(
         "../notebooks/maria/train_dup.csv").drop_duplicates().dropna()
     corpus = pd.concat([df['question1'], df['question2']]).unique()
-
-
-
+    d = {}
+    for t in SpacyTokens(corpus).remove(punct):
+        d[t.text.lower()] = d.get(t.text.lower(), 0) + 1
+    utils.to_pickle(d, "../data/total_words.pkl")
