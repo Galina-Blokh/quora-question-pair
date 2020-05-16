@@ -8,7 +8,9 @@ from spacy.lang.en import English
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
 from spacy.tokens import Doc, Token
-from hunspell import Hunspell
+import en_core_web_md
+
+
 import utils
 from utils.pipeline import Pipeline
 
@@ -27,10 +29,10 @@ nlp = None
 
 
 @lru_cache(10)
-def nlp_parser(name="en_core_web_md") -> Language:
+def nlp_parser() -> Language:
     global nlp
     if nlp is None:
-        nlp = spacy.load(name)
+        nlp = en_core_web_md.load()
         infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
         infix_re = spacy.util.compile_infix_regex(infixes)
         nlp.tokenizer = spacy.tokenizer.Tokenizer(nlp.vocab, infix_finditer=infix_re.finditer)
@@ -148,6 +150,7 @@ class SpacyTokens(Fluent):
 
 
 if __name__ == '__main__':
+    from hunspell import Hunspell
     # remove_all = SpacyTokens("It's good").remove_all(number, punct, regex("\d+"))
     # j = list(remove_all)
     h = Hunspell()
