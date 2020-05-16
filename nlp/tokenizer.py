@@ -10,7 +10,6 @@ from spacy.tokenizer import Tokenizer
 from spacy.tokens import Doc, Token
 import en_core_web_md
 
-
 import utils
 from utils.pipeline import Pipeline
 
@@ -21,7 +20,6 @@ def punct(t):
     return t.is_punct
 
 
-# punct = lambda t: t.is_punct
 stop = lambda t: t.is_stop
 number = lambda t: t.like_num
 
@@ -29,10 +27,13 @@ nlp = None
 
 
 @lru_cache(10)
-def nlp_parser() -> Language:
+def nlp_parser(name="en_core_web_md") -> Language:
     global nlp
     if nlp is None:
-        nlp = en_core_web_md.load()
+        try:
+            nlp = spacy.load(name)
+        except:
+            nlp = en_core_web_md.load()
         infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
         infix_re = spacy.util.compile_infix_regex(infixes)
         nlp.tokenizer = spacy.tokenizer.Tokenizer(nlp.vocab, infix_finditer=infix_re.finditer)
