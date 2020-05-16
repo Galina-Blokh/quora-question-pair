@@ -3,7 +3,6 @@ from functools import lru_cache, wraps
 
 import spacy
 from flupy.fluent import Fluent
-from nltk import ngrams
 from spacy.lang.en import English
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
@@ -12,7 +11,17 @@ import en_core_web_md
 import utils
 from utils.pipeline import Pipeline
 
+from nltk.corpus import stopwords
+
+STOP_WORDS = set(stopwords.words("english")) - {'who', 'whom', 'what', 'when', 'where', 'why', 'how'}
+STOP_WORDS.add('-PRON-') #for now.
+
 space = lambda t: t.is_space
+
+
+def stop_words(tok):
+    if str(tok) in STOP_WORDS:
+        return tok
 
 
 def punct(t):
