@@ -83,7 +83,7 @@ for t in SpacyTokens("ipad 4").remove(regex("\d+")):
     print(t)
 
 
-# In[10]:
+# In[14]:
 
 
 from nltk import ngrams
