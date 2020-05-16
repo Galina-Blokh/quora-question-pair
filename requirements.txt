@@ -17,3 +17,4 @@ kaggle
 swifter
 spacy
 textacy
+pre-commit
