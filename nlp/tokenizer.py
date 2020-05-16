@@ -8,7 +8,7 @@ from spacy.lang.en import English
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
 from spacy.tokens import Doc, Token
-
+from hunspell import Hunspell
 import utils
 from utils.pipeline import Pipeline
 
@@ -150,14 +150,27 @@ class SpacyTokens(Fluent):
 if __name__ == '__main__':
     # remove_all = SpacyTokens("It's good").remove_all(number, punct, regex("\d+"))
     # j = list(remove_all)
-    corpus = ["test test", "test"]
-    d = list(SpacyTokens(corpus).remove(punct))
-    import pandas as pd
-
-    df = pd.read_csv(
-        "../notebooks/maria/train_dup.csv").drop_duplicates().dropna()
-    corpus = pd.concat([df['question1'], df['question2']]).unique()
-    d = {}
-    for t in SpacyTokens(corpus).remove(punct):
-        d[t.text.lower()] = d.get(t.text.lower(), 0) + 1
-    utils.to_pickle(d, "../data/total_words.pkl")
+    h = Hunspell()
+    d = utils.from_pickle("../data/total_words.pkl")
+    hs = {}
+    nlp = nlp_parser()
+    for w, c in d.items():
+        try:
+            if h.spell(w) or h.spell(w.title()) or h.spell(w.upper()):
+                continue
+            t = nlp(w)[0]
+            if t.ent_type:
+                continue
+            hs[w] = c
+        except:
+            pass
+    utils.to_pickle(hs, "../data/typos_words.pkl")
+    # import pandas as pd
+    #
+    # df = pd.read_csv(
+    #     "../notebooks/maria/train_dup.csv").drop_duplicates().dropna()
+    # corpus = pd.concat([df['question1'], df['question2']]).unique()
+    # d = {}
+    # for t in SpacyTokens(corpus).remove(punct):
+    #     d[t.text.lower()] = d.get(t.text.lower(), 0) + 1
+    # utils.to_pickle(d, "../data/total_words.pkl")

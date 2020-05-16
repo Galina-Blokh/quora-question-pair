@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[4]:
 
 
 import os
@@ -16,43 +16,49 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[4]:
+# In[5]:
 
 
 import os
 import sys
 sys.path.append(os.path.abspath('../../'))
-from nlp.preprocessing import spacy_tokenizer
+from nlp.tokenizer import *
 
 
-# In[5]:
+# In[2]:
 
 
 data_folder = "../../data/raw/"
 
 
-# In[6]:
+# In[7]:
 
 
-get_ipython().system('ls "../../data/raw/"')
+get_ipython().system('ls "../"')
+
+
+# In[8]:
+
+
+df = pd.read_csv(
+        "../maria/train_dup.csv").drop_duplicates().dropna()
+corpus = pd.concat([df['question1'], df['question2']]).unique()[:100]
+for t in SpacyTokens(corpus).remove(punct):
+    print(t)
 
 
 # In[9]:
 
 
-df = pd.read_csv(os.path.join(data_folder, "train.csv.zip"), compression="zip").set_index("id")
+for t in SpacyTokens(corpus).remove_all(punct, number):
+    print(t)
 
 
 # In[10]:
 
 
-df.head()
-
-
-# In[15]:
-
-
-100*df["is_duplicate"].value_counts()/len(df)
+for t in SpacyTokens("I go to the supermarket").remove_all(punct, number, stop):
+    print(t)
 
 
 # In[ ]:

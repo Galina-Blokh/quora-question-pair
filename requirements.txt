@@ -18,3 +18,4 @@ swifter
 spacy
 textacy
 pre-commit
+attr

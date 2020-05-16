@@ -180,7 +180,7 @@ if __name__ == '__main__':
     df = pd.read_csv(
         "../notebooks/maria/train_dup.csv").drop_duplicates().dropna()
     corpus = pd.concat([df['question1'], df['question2']]).unique()
-    # fdist = create_words_dist(corpus)
+    fdist = create_words_dist(corpus)
     d = utils.from_pickle("../data/words.pkl")  # create_words_dist(corpus)
     m = {w: c for w, c in d.items() if c<100}
 
@@ -188,7 +188,6 @@ if __name__ == '__main__':
     d = create_spell_dict(m.keys())
     utils.to_pickle(d, "../data/spell_words.pkl")
     nlp = nlp_parser()
-    sentence = "How does the Surface-Pro himself 4 compare with iPad Pro?"
 
 
     # sentence = "I went to the this shop."
