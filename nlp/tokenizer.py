@@ -65,7 +65,7 @@ class SpacyTokenizer(Tokenizer):
             spacy.util.compile_suffix_regex(cls.suffixes).search if cls.suffixes else None
         )
         infix_finditer = (
-            spacy.util.compile_infix_regex(cls.prefixes + tuple([r"[-]~"])).finditer if cls.prefixes else None
+            spacy.util.compile_infix_regex(cls.infixes + tuple([r"[-]~"])).finditer if cls.infixes else None
         )
         vocab = nlp.vocab if nlp is not None else cls.create_vocab(nlp)
         return Tokenizer(
