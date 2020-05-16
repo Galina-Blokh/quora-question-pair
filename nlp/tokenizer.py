@@ -148,6 +148,20 @@ class SpacyTokens(Fluent):
 
         return SpacyTokens(_impl())
 
+    @self_to_spacy_tokens
+    def upper(self):
+        def _impl():
+            yield from self.map(lambda t: SpacyTokens.to_token(t.text.upper()))
+
+        return SpacyTokens(_impl())
+
+    @self_to_spacy_tokens
+    def title(self):
+        def _impl():
+            yield from self.map(lambda t: SpacyTokens.to_token(t.text.title()))
+
+        return SpacyTokens(_impl())
+
 
 if __name__ == '__main__':
     from hunspell import Hunspell
