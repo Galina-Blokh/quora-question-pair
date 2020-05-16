@@ -1,9 +1,8 @@
 import re
 from functools import lru_cache, wraps
-from itertools import chain
 
 import spacy
-from flupy.fluent import self_to_flu, Fluent, flu
+from flupy.fluent import Fluent
 from spacy.lang.en import English
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
@@ -31,7 +30,7 @@ def nlp_parser(name="en_core_web_md") -> Language:
     global nlp
     if nlp is None:
         try:
-            nlp = spacy.load(name)
+            nlp = English()#spacy.load(name)
         except:
             nlp = en_core_web_md.load()
         infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
@@ -56,10 +55,12 @@ class SpacyTokenizer(Tokenizer):
         if nlp is None:
             nlp = nlp_parser()
         cls = nlp.Defaults
+        nlp.Defaults.stop_words |= {"a"}
+        nlp.Defaults.stop_words -= {"who", "what", "when", "where", "why", "how", "there", "that"}
         rules = cls.tokenizer_exceptions
         token_match = cls.token_match
         prefix_search = (
-            spacy.util.compile_prefix_regex(cls.prefixes).search if cls.prefixes else None
+            spacy.util.compile_prefix_regex(cls.prefixes + tuple([r"[-]~"])).search if cls.prefixes else None
         )
         suffix_search = (
             spacy.util.compile_suffix_regex(cls.suffixes).search if cls.suffixes else None
