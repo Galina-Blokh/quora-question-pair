@@ -54,15 +54,31 @@ for t in SpacyTokens(corpus).remove_all(punct, number):
     print(t)
 
 
-# In[10]:
+# In[11]:
 
 
-for t in SpacyTokens("I go to the supermarket").remove_all(punct, number, stop):
+for t in SpacyTokens("I go to the supermarket").lemmatize():
     print(t)
 
 
-# In[ ]:
+# In[12]:
+
+
+for t in SpacyTokens("I went to the supermarket").lemmatize():
+    print(t)
+
+
+# In[15]:
 
 
 
+for t in SpacyTokens("London is The Capital Of Great Britain").lower():
+    print(t)
+
+
+# In[14]:
+
+
+for t in SpacyTokens("ipad 4").remove(regex("\d+")):
+    print(t)
 
