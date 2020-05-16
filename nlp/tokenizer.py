@@ -8,7 +8,6 @@ from spacy.language import Language
 from spacy.tokenizer import Tokenizer
 from spacy.tokens import Doc, Token
 import en_core_web_md
-
 import utils
 from utils.pipeline import Pipeline
 
@@ -18,8 +17,9 @@ space = lambda t: t.is_space
 def punct(t):
     return t.is_punct
 
+def stop(t):
+    return t.is_stop
 
-stop = lambda t: t.is_stop
 number = lambda t: t.like_num
 
 nlp = None
@@ -55,22 +55,31 @@ class SpacyTokenizer(Tokenizer):
         if nlp is None:
             nlp = nlp_parser()
         cls = nlp.Defaults
-        nlp.Defaults.stop_words |= {"a"}
+        nlp.Defaults.stop_words |= {"a", "the", "is"}
         # https://en.wikipedia.org/wiki/Interrogative_word
-        nlp.Defaults.stop_words -= {"who", "whom", "whose", "what", "when", "where", "why", "how",
-                                    "there", "that", "which", "whose", "whither", "whence", "whether", "whatsoever"}
+        not_stop_words = ["who", "whom", "whose", "what", "when", "where", "why", "how",
+                                    "there", "that", "which", "whose", "whither", "whence", "whether", "whatsoever", "not"]
+        nlp.Defaults.stop_words -= set(not_stop_words)
         rules = cls.tokenizer_exceptions
         token_match = cls.token_match
         prefix_search = (
-            spacy.util.compile_prefix_regex(cls.prefixes + tuple([r"[-]~"])).search if cls.prefixes else None
+            spacy.util.compile_prefix_regex(cls.prefixes).search if cls.prefixes else None
         )
         suffix_search = (
             spacy.util.compile_suffix_regex(cls.suffixes).search if cls.suffixes else None
         )
+        inf = list(nlp.Defaults.infixes)
+        inf = [x for x in inf if
+               '-|–|—|--|---|——|~' not in x]
         infix_finditer = (
-            spacy.util.compile_infix_regex(cls.infixes + tuple([r"[-]~"])).finditer if cls.infixes else None
+            spacy.util.compile_infix_regex(cls.prefixes + tuple(inf)).finditer if cls.infixes else None
         )
+
         vocab = nlp.vocab if nlp is not None else cls.create_vocab(nlp)
+        for w in not_stop_words:
+            vocab[w].is_stop = False
+            vocab[w.title()].is_stop = False
+            vocab[w.upper()].is_stop = False
         return Tokenizer(
             vocab,
             rules=rules,
