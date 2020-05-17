@@ -15,20 +15,26 @@ from nltk.corpus import stopwords
 
 STOP_WORDS = set(stopwords.words("english")) - {'who', 'whom', 'what', 'when', 'where', 'why', 'how'}
 STOP_WORDS.add('-PRON-') #for now.
-
-space = lambda t: t.is_space
-
-
 def stop_words(tok):
     if str(tok) in STOP_WORDS:
         return tok
+
+space = lambda t: t.is_space
 
 
 def punct(t):
     return t.is_punct
 
+
 def stop(t):
     return t.is_stop
+
+
+def question(t):
+    return (t.text.lower() in ["who", "whom", "whose", "what", "when", "where", "why", "how",
+                               "there", "that", "which", "whose", "whither", "whence", "whether", "whatsoever"]
+            or any((t.tag_ == "WDT", t.tag_ == "WP", t.tag_ == "WP$", t.tag_ == "WRB")))
+
 
 number = lambda t: t.like_num
 
@@ -40,7 +46,7 @@ def nlp_parser(name="en_core_web_md") -> Language:
     global nlp
     if nlp is None:
         try:
-            nlp = spacy.load(name)
+            nlp = English()  # spacy.load(name)
         except:
             nlp = en_core_web_md.load()
         infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
@@ -68,7 +74,7 @@ class SpacyTokenizer(Tokenizer):
         nlp.Defaults.stop_words |= {"a", "the", "is"}
         # https://en.wikipedia.org/wiki/Interrogative_word
         not_stop_words = ["who", "whom", "whose", "what", "when", "where", "why", "how",
-                                    "there", "that", "which", "whose", "whither", "whence", "whether", "whatsoever", "not"]
+                          "there", "that", "which", "whose", "whither", "whence", "whether", "whatsoever", "not"]
         nlp.Defaults.stop_words -= set(not_stop_words)
         rules = cls.tokenizer_exceptions
         token_match = cls.token_match
@@ -129,8 +135,10 @@ class SpacyTokens(Fluent):
         for i in iterable:
             if isinstance(i, Token):
                 yield i
+            elif isinstance(i, (Doc, SpacyTokens)):
+                yield from (t for t in i)
             else:
-                yield from (t for t in SpacyTokenizer.from_lang()(i))
+                yield SpacyTokens(SpacyTokenizer.from_lang()(i))
 
     @staticmethod
     def to_token(string):
@@ -187,7 +195,9 @@ class SpacyTokens(Fluent):
 
 
 if __name__ == '__main__':
+    d = list(SpacyTokens(["test test", "test2"]).remove(punct))
     from hunspell import Hunspell
+
     h = Hunspell()
     d = utils.from_pickle("../data/total_words.pkl")
     hs = {}
