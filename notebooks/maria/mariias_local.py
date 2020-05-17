@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 from sklearn import metrics
 import nltk
 from nltk.corpus import stopwords
@@ -87,41 +87,6 @@ feature_names = count_vectorizer.get_feature_names()
 pd.DataFrame(bag_of_words.toarray(), columns = feature_names)
 
 
-# Так, мы здесь взяли 2 похожих вопроса, каждый соответствует ряду теперь. Можно заметить, что вектора типа очень близки, но нужно смотреть на ключевые слова, а не на предлоги, союзы и т.д
-# 
-# 
-# Мы будем потом выбрасывать эти стоп-слова, которые есть в stopwords.words("english")
-
-# # Планы:
-
-# игнорирование регистра слов;
-# 
-# 
-# игнорирование пунктуации;
-# 
-# 
-# выкидывание стоп-слов;
-# 
-# 
-# приведение слов к их базовым формам (лемматизация);
-# 
-# 
-# исправление неправильно написанных слов.
-# 
-# 
-# подсчет н-грамм
-# 
-# 
-# TF/IDF - как помогут?
-# 
-# 
-# как преобразовать в числа?
-
-# ![title](project_work_scheme.png)
-
-# In[63]:
-
-
 # nltk cleaning: very slow!
 lemmatizer = WordNetLemmatizer()
 def clean_sentence_lemmatizer(sentence):
@@ -146,7 +111,7 @@ def clean_sentence_lemmatizer(sentence):
     return sentence
 
 print(duplicates.question1[5])
-clean_sentencelemm(duplicates.question1[5])
+clean_sentence_lemmatizer(duplicates.question1[5])
 
 
 # ## SPACY
