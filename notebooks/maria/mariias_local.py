@@ -40,7 +40,7 @@ STOP_WORDS = set(stopwords.words("english")) - {'who', 'whom', 'what', 'when', '
 # In[72]:
 
 
-df = pd.read_csv('train_dup.csv').drop(columns='id', axis=1)
+df = pd.read_csv('../galina/train_dup.csv').drop(columns='id', axis=1)
 df = df.dropna()
 df.head()
 

@@ -41,7 +41,7 @@ get_ipython().system('ls "../"')
 
 
 df = pd.read_csv(
-        "../maria/train_dup.csv").drop_duplicates().dropna()
+    "../galina/train_dup.csv").drop_duplicates().dropna()
 corpus = pd.concat([df['question1'], df['question2']]).unique()[:100]
 for t in SpacyTokens(corpus).remove(punct):
     print(t)

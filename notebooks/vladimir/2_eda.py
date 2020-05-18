@@ -34,7 +34,7 @@ from nlp.tokenizer import *
 # In[4]:
 
 
-filename = "../maria/train_dup.csv"
+filename = "../galina/train_dup.csv"
 
 
 # In[5]:
