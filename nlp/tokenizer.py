@@ -45,10 +45,10 @@ nlp = None
 def nlp_parser(name="en_core_web_md") -> Language:
     global nlp
     if nlp is None:
-        try:
-            nlp = English()  # spacy.load(name)
-        except:
-            nlp = en_core_web_md.load()
+        # try:
+        #     nlp = English()  # spacy.load(name)
+        # except:
+        nlp = en_core_web_md.load()
         infixes = nlp.Defaults.prefixes + tuple([r"[-]~"])
         infix_re = spacy.util.compile_infix_regex(infixes)
         nlp.tokenizer = spacy.tokenizer.Tokenizer(nlp.vocab, infix_finditer=infix_re.finditer)
