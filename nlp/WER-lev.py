@@ -1,7 +1,14 @@
 import pandas as pd
 import numpy as np
 
+
 def lev_dist(a1, a2):
+    """
+    weighted Levenshtein distance
+    :param a1, sentence
+    :param a2 ,sentence
+    :return: weighted Levenshtein distance
+    """
     source=a1.split()
     target=a2.split()
     if source == target:
@@ -28,15 +35,14 @@ def lev_dist(a1, a2):
            ((len(source)+len(target))/2)
 
 
+if __name__ == '__main__':
+    df = pd.read_csv('preprocess_all.csv').dropna()
+    df['lev_dist'] = np.vectorize(lev_dist)(df['preprocessed_q1'], df['preprocessed_q2'])
+    df.to_csv('preprocess_all_lev.csv')
+    df['lev_pred']=0
+    df['lev_pred']=df.lev_dist < 0.35
+    df["lev_pred"]=df["lev_pred"].astype(int)
+    df['lev_true']=df.lev_pred ==df.is_duplicate
+    print(df['lev_true'].value_counts())
 
-df = pd.read_csv('preprocess_all.csv').dropna()
-df['lev_dist'] = np.vectorize(lev_dist)(df['preprocessed_q1'], df['preprocessed_q2'])
-df.to_csv('preprocess_all_lev.csv')
-df['lev_pred']=0
-df['lev_pred']=df.lev_dist < 0.35
-df["lev_pred"]=df["lev_pred"].astype(int)
-df['lev_true']=df.lev_pred ==df.is_duplicate
-print(df['lev_true'].value_counts())
-
-
-print(len(df))
+    print(len(df))
