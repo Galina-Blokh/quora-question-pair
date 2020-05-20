@@ -13522,7 +13522,7 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nltk cleaning: very slow!</span>
@@ -13548,8 +13548,8 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
     <span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sentence</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">duplicates</span><span class="o">.</span><span class="n">question1</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
-<span class="n">clean_sentence_lemmatizer</span><span class="p">(</span><span class="n">duplicates</span><span class="o">.</span><span class="n">question1</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="n">clean_sentence_lemmatizer</span><span class="p">(</span><span class="s1">&#39;day days date dates shotgun shotguns wolf wolves child children&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13562,24 +13562,13 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Astrology: I am a Capricorn Sun Cap moon and cap rising...what does that say about me?
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[45]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;astrology capricorn sun cap moon cap rising what say&#39;</pre>
+<pre>&#39;day day date date shotgun shotgun wolf wolf child child&#39;</pre>
 </div>
 
 </div>
@@ -13978,25 +13967,19 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Playing with vectorizer</p>
-<p>first cells are just rubbish</p>
+<p>took processed data</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This is an example, will be later removed</span>
-<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">duplicates</span><span class="o">.</span><span class="n">question1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">duplicates</span><span class="o">.</span><span class="n">question2</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
-<span class="c1"># Create the Bag-of-Words Model</span>
-
-<span class="n">bag_of_words</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">duplicates</span><span class="o">.</span><span class="n">question1</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">duplicates</span><span class="o">.</span><span class="n">question2</span><span class="p">[</span><span class="mi">5</span><span class="p">]])</span>
-<span class="c1"># Show the Bag-of-Words Model as a pandas DataFrame</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bag_of_words</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_p</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;preprocess_all.csv&#39;</span><span class="p">)</span>
+<span class="n">df_p</span> <span class="o">=</span> <span class="n">df_p</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">])</span>
+<span class="n">df_p</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14009,18 +13992,7 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Astrology: I am a Capricorn Sun Cap moon and cap rising...what does that say about me? I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this say about me?
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[11]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -14043,68 +14015,65 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>about</th>
-      <th>am</th>
-      <th>and</th>
-      <th>ascendant</th>
-      <th>astrology</th>
-      <th>cap</th>
-      <th>capricorn</th>
-      <th>does</th>
-      <th>in</th>
-      <th>me</th>
-      <th>moon</th>
-      <th>rising</th>
-      <th>say</th>
-      <th>sun</th>
-      <th>that</th>
-      <th>this</th>
-      <th>triple</th>
-      <th>what</th>
+      <th>qid1</th>
+      <th>qid2</th>
+      <th>question1</th>
+      <th>question2</th>
+      <th>is_duplicate</th>
+      <th>preprocessed_q1</th>
+      <th>preprocessed_q2</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>0</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
+      <td>What is the step by step guide to invest in sh...</td>
+      <td>What is the step by step guide to invest in sh...</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
+      <td>what step step guide invest share market india</td>
+      <td>what step step guide invest share market</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>What is the story of Kohinoor (Koh-i-Noor) Dia...</td>
+      <td>What would happen if the Indian government sto...</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>what story kohinoor koh-i-noor diamond</td>
+      <td>what would happen indian government stole kohi...</td>
+    </tr>
+    <tr>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>5</td>
+      <td>6</td>
+      <td>How can I increase the speed of my internet co...</td>
+      <td>How can Internet speed be increased by hacking...</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>how increase speed internet connection using vpn</td>
+      <td>how internet speed increased hacking dns</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>7</td>
+      <td>8</td>
+      <td>Why am I mentally very lonely? How can I solve...</td>
+      <td>Find the remainder when [math]23^{24}[/math] i...</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>why mentally lonely how solve</td>
+      <td>find remainder when math 23^ 24 /math divided ...</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>9</td>
+      <td>10</td>
+      <td>Which one dissolve in water quikly sugar, salt...</td>
+      <td>Which fish would survive in salt water?</td>
+      <td>0</td>
+      <td>one dissolve water quikly sugar salt methane c...</td>
+      <td>fish would survive salt water</td>
     </tr>
   </tbody>
 </table>
@@ -14119,10 +14088,11 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s1">&#39;hi sun&#39;</span><span class="p">,</span> <span class="s1">&#39;moon rising asdf&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;df_clean.csv&#39;</span><span class="p">)</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14135,7 +14105,7 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[27]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -14158,255 +14128,52 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>about</th>
-      <th>am</th>
-      <th>and</th>
-      <th>ascendant</th>
-      <th>astrology</th>
-      <th>cap</th>
-      <th>capricorn</th>
-      <th>does</th>
-      <th>in</th>
-      <th>me</th>
-      <th>moon</th>
-      <th>rising</th>
-      <th>say</th>
-      <th>sun</th>
-      <th>that</th>
-      <th>this</th>
-      <th>triple</th>
-      <th>what</th>
+      <th>qid1</th>
+      <th>qid2</th>
+      <th>question1</th>
+      <th>question2</th>
+      <th>is_duplicate</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>2</td>
+      <td>what step step guide invest share market india</td>
+      <td>what step step guide invest share market</td>
       <td>0</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfhead5</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">dfhead5_bow</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dfhead5</span><span class="p">)</span>
-<span class="n">dfhead5_cv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dfhead5_bow</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
-<span class="n">dfhead5_cv</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">is_duplicate</span>
-<span class="n">dfhead5_cv</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[30]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>about</th>
-      <th>am</th>
-      <th>and</th>
-      <th>ascendant</th>
-      <th>astrology</th>
-      <th>cap</th>
-      <th>capricorn</th>
-      <th>does</th>
-      <th>in</th>
-      <th>me</th>
-      <th>moon</th>
-      <th>rising</th>
-      <th>say</th>
-      <th>sun</th>
-      <th>that</th>
-      <th>this</th>
-      <th>triple</th>
-      <th>what</th>
-      <th>target</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+      <td>what story kohinoor koh noor diamond</td>
+      <td>what would happen indian government stole kohi...</td>
       <td>0</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>5</td>
+      <td>6</td>
+      <td>how i increase speed internet connection using...</td>
+      <td>how internet speed increased hacking dns</td>
       <td>0</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>7</td>
+      <td>8</td>
+      <td>why i mentally lonely how i solve</td>
+      <td>find remainder when math          math divided...</td>
       <td>0</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>9</td>
+      <td>10</td>
+      <td>which one dissolve water quikly sugar salt met...</td>
+      <td>which fish would survive salt water</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -14419,27 +14186,6 @@ I&#39;m a triple Capricorn (Sun, Moon and ascendant in Capricorn) What does this
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now i'm trying out vectorizers for cleaned df</p>
-<p>how df was cleaned:</p>
-
-<pre><code>first lambda func:
-    nlp = English()
-    clean_question = lambda sentence: ' '.join([word.lemma_.lower() for word in nlp(sentence)                                           if word.lemma_ not in STOP_WORDS if word.lemma_ not in PUNCTS])
-    df_clean = df.copy()
-    df_clean['question1'] = df.apply(lambda row: clean_question(row['question1']), axis=1)
-    df_clean['question2'] = df.apply(lambda row: clean_question(row['question2']), axis=1)
-
-second lambda func:
-    resub = lambda q: re.sub("[^A-Za-z]", " ", q)
-    df_clean['question1'] = df_clean.apply(lambda row: resub(row['question1']), axis=1)
-    df_clean['question2'] = df_clean.apply(lambda row: resub(row['question2']), axis=1)</code></pre>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14450,20 +14196,36 @@ second lambda func:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Initial cleaned data shape </span><span class="si">{df_clean.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># my clean</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;df_clean.csv&#39;</span><span class="p">)</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Initial cleaned data shape </span><span class="si">{df_clean.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-<span class="n">corpus</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">question1</span><span class="p">)</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">question2</span><span class="p">))</span>
-<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TfIdfVectorizer shape </span><span class="si">{X.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">corpus_clean</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">question2</span><span class="p">)</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">question1</span><span class="p">))</span>
+<span class="n">vectorizer_clean</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_clean</span> <span class="o">=</span> <span class="n">vectorizer_clean</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus_clean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TfIdfVectorizer shape </span><span class="si">{X_clean.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
-<span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
-<span class="n">X2</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Count Vectorizer/bag of words shape </span><span class="si">{X2.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">cv_clean</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">X2_clean</span> <span class="o">=</span> <span class="n">cv_clean</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus_clean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Count Vectorizer/bag of words shape </span><span class="si">{X2_clean.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14480,9 +14242,53 @@ second lambda func:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Initial cleaned data shape (404287, 5)
-TfIdfVectorizer shape (523984, 79161)
-Count Vectorizer/bag of words shape (523984, 79161)
+<pre>Initial cleaned data shape (404266, 5)
+TfIdfVectorizer shape (523972, 79158)
+Count Vectorizer/bag of words shape (523972, 79158)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># this is good df</span>
+<span class="n">df_p</span> <span class="o">=</span> <span class="n">df_p</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Initial preprocessed data shape </span><span class="si">{df_p.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">corpus_p</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df_p</span><span class="o">.</span><span class="n">preprocessed_q1</span><span class="p">)</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df_p</span><span class="o">.</span><span class="n">preprocessed_q1</span><span class="p">))</span>
+<span class="n">vectorizer_p</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_p</span> <span class="o">=</span> <span class="n">vectorizer_p</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus_p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TfIdfVectorizer shape </span><span class="si">{X_p.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">cv_p</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">X2_p</span> <span class="o">=</span> <span class="n">cv_p</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus_p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Count Vectorizer/bag of words shape with max_features 1000 </span><span class="si">{X2_p.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Initial preprocessed data shape (404247, 7)
+TfIdfVectorizer shape (286176, 67398)
+Count Vectorizer/bag of words shape with max_features 1000 (286176, 1000)
 </pre>
 </div>
 </div>
@@ -14500,18 +14306,42 @@ Count Vectorizer/bag of words shape (523984, 79161)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nevermind))</span>
+<span class="c1"># t0 = time.time()</span>
+<span class="c1"># c_vectorized_q1 = cv_clean.transform(df_clean.head(10000).question1)</span>
+<span class="c1"># c_vectorized_q2 = cv_clean.transform(df_clean.head(10000).question2)</span>
+<span class="c1"># print(f&#39;Count Vectorizer transformed first 10000 rows into sparse matrix of shape {df_p_vectorized_q1.shape}&#39;)</span>
+<span class="c1"># df_p_vectorized_cv_q1 = pd.DataFrame(df_p_vectorized_q1.toarray(), columns = cv_clean.get_feature_names())</span>
+<span class="c1"># df_p_vectorized_cv_q2 = pd.DataFrame(df_p_vectorized_q2.toarray(), columns = cv_clean.get_feature_names())</span>
+<span class="c1"># print(f&#39;We can applyt todense() and take df from that, that will be again shape {df_p_vectorized_cv_q1.shape}&#39;)</span>
+<span class="c1"># print(&#39;First few rows from that df: \n&#39;)</span>
+<span class="c1"># df_p_vectorized_cv_q1.head(2)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># let&#39;s try Count Vectorizer on first 10000 rows - transform q1 and q2 to vectors</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">df_clean_vectorized_q1</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">question1</span><span class="p">)</span>
-<span class="n">df_clean_vectorized_q2</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">question2</span><span class="p">)</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">df_clean_vectorized_cv_q1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_clean_vectorized_q1</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-<span class="n">df_clean_vectorized_cv_q2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_clean_vectorized_q2</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
-<span class="n">df_clean_vectorized_cv_q1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">df_clean_vectorized_cv_q2</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
+<span class="n">df_p_vectorized_q1</span> <span class="o">=</span> <span class="n">cv_p</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_p</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">preprocessed_q1</span><span class="p">)</span>
+<span class="n">df_p_vectorized_q2</span> <span class="o">=</span> <span class="n">cv_p</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_p</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">preprocessed_q2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Count Vectorizer transformed first 10000 rows into sparse matrix of shape </span><span class="si">{df_p_vectorized_q1.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">df_p_vectorized_cv_q1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_p_vectorized_q1</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cv_p</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="n">df_p_vectorized_cv_q2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_p_vectorized_q2</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">cv_p</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;We can applyt todense() and take df from that, that will be again shape </span><span class="si">{df_p_vectorized_cv_q1.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First few rows from that df: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">df_p_vectorized_cv_q1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14524,13 +14354,119 @@ Count Vectorizer/bag of words shape (523984, 79161)
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Count Vectorizer transformed first 10000 rows into sparse matrix of shape (10000, 1000)
+We can applyt todense() and take df from that, that will be again shape (10000, 1000)
+First few rows from that df: 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[66]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="output_text output_subarea output_execute_result">
-<pre>((10000, 79161), (10000, 79161), 0.13861083984375)</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>000</th>
+      <th>10</th>
+      <th>100</th>
+      <th>1000</th>
+      <th>11</th>
+      <th>12</th>
+      <th>12th</th>
+      <th>13</th>
+      <th>15</th>
+      <th>16</th>
+      <th>...</th>
+      <th>write</th>
+      <th>writing</th>
+      <th>written</th>
+      <th>wrong</th>
+      <th>year</th>
+      <th>years</th>
+      <th>yes</th>
+      <th>yet</th>
+      <th>young</th>
+      <th>youtube</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 1000 columns</p>
+</div>
 </div>
 
 </div>
@@ -14549,1059 +14485,30 @@ Count Vectorizer/bag of words shape (523984, 79161)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># counting cosine similarity between first 2000 questions</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># counting cosine similarity between first 10000 qs</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span> <span class="c1"># aka 1 - cosine distance</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cosine</span>
 
-<span class="k">def</span> <span class="nf">count_cosine_dist_between_two_dfs</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">count_cosine_dist_between_two_dfs</span><span class="p">(</span><span class="n">sparse_m1</span><span class="p">,</span> <span class="n">sparse_m2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Receives a dfs with vectors/matrices and counts pairwise cosine distancer  </span>
+<span class="sd">    Receives  sparces matrices and counts pairwise cosine distancer  </span>
 <span class="sd">    Args:</span>
-<span class="sd">        df: dataframe with some questions</span>
+<span class="sd">        matrices</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">        pd.Series with diagoanal els with added column of pairwise distances</span>
+<span class="sd">        list of pairwise distances</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cs</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">cs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cs</span><span class="p">))]</span>
+    
+    <span class="k">return</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">sparse_m1</span><span class="o">.</span><span class="n">todense</span><span class="p">()[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">sparse_m2</span><span class="o">.</span><span class="n">todense</span><span class="p">()[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="nb">min</span><span class="p">(</span><span class="n">sparse_m1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sparse_m2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])))]</span>
 
-<span class="n">count_cosine_dist_between_two_dfs</span><span class="p">(</span><span class="n">df_clean_vectorized_cv_q1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">,</span> <span class="p">:],</span> <span class="n">df_clean_vectorized_cv_q2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">,</span> <span class="p">:])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[37]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[0.9486832980505138,
- 0.6154574548966638,
- 0.4629100498862757,
- 0.0,
- 0.36927447293799825,
- 0.5454545454545454,
- 0.0,
- 0.3333333333333334,
- 1.0000000000000002,
- 0.4629100498862757,
- 0.0,
- 0.6708203932499369,
- 0.7999999999999999,
- 0.8944271909999159,
- 0.9375,
- 0.27386127875258315,
- 0.6666666666666669,
- 0.0,
- 0.5892556509887895,
- 0.6666666666666669,
- 0.6708203932499369,
- 0.75,
- 0.5,
- 0.0,
- 0.14285714285714282,
- 0.8017837257372731,
- 0.8660254037844388,
- 0.4082482904638631,
- 0.8333333333333336,
- 0.6324555320336758,
- 0.6666666666666669,
- 0.4330127018922194,
- 0.8017837257372731,
- 0.0,
- 0.8944271909999159,
- 0.4714045207910316,
- 0.6396021490668312,
- 0.0668153104781061,
- 0.5773502691896258,
- 0.12499999999999997,
- 0.0,
- 0.9999999999999999,
- 0.9999999999999999,
- 0.5669467095138407,
- 0.9090909090909092,
- 0.5477225575051662,
- 0.0,
- 0.0,
- 0.7302967433402215,
- 1.0000000000000002,
- 0.5714285714285713,
- 0.8432740427115678,
- 0.0,
- 0.6681531047810609,
- 0.0,
- 0.16666666666666666,
- 0.2041241452319315,
- 0.6708203932499369,
- 0.5669467095138407,
- 0.4472135954999579,
- 0.1889822365046136,
- 0.5345224838248487,
- 0.3721042037676254,
- 0.8944271909999159,
- 0.9128709291752769,
- 0.5661385170722979,
- 0.6,
- 0.5477225575051662,
- 0.8660254037844388,
- 0.0,
- 0.7745966692414834,
- 1.0,
- 0.8944271909999159,
- 0.3903600291794132,
- 0.9561828874675149,
- 0.14673479641335552,
- 0.5,
- 0.36927447293799825,
- 0.3333333333333333,
- 0.9128709291752771,
- 0.1849000654084097,
- 0.24999999999999994,
- 0.3450327796711771,
- 0.3779644730092272,
- 0.5714285714285713,
- 0.5773502691896258,
- 0.8486684247915055,
- 0.5,
- 0.7999999999999999,
- 0.9999999999999997,
- 0.5039526306789696,
- 0.41666666666666663,
- 0.5477225575051662,
- 0.5163977794943223,
- 0.6708203932499369,
- 1.0000000000000002,
- 0.14433756729740646,
- 0.35355339059327373,
- 0.47140452079103173,
- 0.1690308509457033,
- 0.5962847939999438,
- 0.4472135954999579,
- 0.502518907629606,
- 0.75,
- 0.6708203932499369,
- 0.28867513459481287,
- 0.0,
- 1.0,
- 0.9128709291752769,
- 0.25,
- 0.6708203932499369,
- 0.7999999999999999,
- 0.1543033499620919,
- 0.5,
- 0.36514837167011077,
- 0.4999999999999999,
- 0.294174202707276,
- 0.14907119849998596,
- 0.801783725737273,
- 0.2357022603955159,
- 0.3162277660168379,
- 0.24999999999999994,
- 0.6666666666666669,
- 0.75,
- 0.0,
- 0.5393598899705937,
- 0.5773502691896258,
- 0.6123724356957946,
- 0.20701966780270625,
- 0.6708203932499369,
- 0.3333333333333334,
- 0.0,
- 0.6708203932499369,
- 0.5669467095138407,
- 0.5303300858899106,
- 0.6666666666666669,
- 0.7302967433402215,
- 0.50709255283711,
- 0.49999999999999994,
- 0.8660254037844388,
- 0.447213595499958,
- 0.25,
- 0.0,
- 0.8944271909999159,
- 0.33968311024337877,
- 0.8888888888888888,
- 0.19999999999999998,
- 0.41403933560541256,
- 0.4714045207910316,
- 0.2519763153394848,
- 0.0,
- 0.75,
- 0.6324555320336758,
- 0.7715167498104596,
- 0.408248290463863,
- 0.47434164902525683,
- 0.408248290463863,
- 0.22360679774997896,
- 0.4743416490252569,
- 0.6,
- 0.75,
- 0.26352313834736496,
- 0.6708203932499369,
- 0.8944271909999159,
- 0.7745966692414834,
- 0.4472135954999579,
- 0.1690308509457033,
- 0.7071067811865477,
- 0.5,
- 0.23354968324845687,
- 0.25819888974716115,
- 0.25,
- 0.22360679774997896,
- 0.3067859955389482,
- 0.7999999999999999,
- 0.7999999999999999,
- 0.6708203932499369,
- 0.7071067811865475,
- 0.7302967433402215,
- 0.7745966692414834,
- 0.6,
- 0.75,
- 0.40089186286863654,
- 0.4472135954999579,
- 0.26726124191242434,
- 0.9375,
- 0.2519763153394848,
- 0.2651650429449553,
- 0.4629100498862757,
- 0.5976143046671968,
- 0.7999999999999999,
- 0.7071067811865477,
- 0.75,
- 0.5039526306789696,
- 0.50709255283711,
- 1.0,
- 0.0,
- 0.7302967433402215,
- 1.0,
- 0.4999999999999999,
- 0.7999999999999999,
- 0.0,
- 0.7378647873726218,
- 0.5477225575051662,
- 0.17677669529663692,
- 0.6396021490668312,
- 1.0,
- 0.5345224838248487,
- 0.4961389383568338,
- 1.0000000000000002,
- 0.4834937784152281,
- 0.5368754921931593,
- 0.0,
- 0.7999999999999999,
- 0.0,
- 0.8944271909999159,
- 0.5443310539518174,
- 0.6123724356957946,
- 0.0,
- 0.6123724356957946,
- 0.5773502691896258,
- 0.5773502691896258,
- 0.8944271909999159,
- 0.14433756729740646,
- 0.6172133998483676,
- 0.4364357804719848,
- 0.9669875568304563,
- 0.4472135954999579,
- 0.3418817293789138,
- 0.6324555320336758,
- 0.36514837167011077,
- 0.2886751345948129,
- 0.9230769230769231,
- 0.0,
- 0.3333333333333333,
- 0.4743416490252569,
- 0.47434164902525683,
- 0.2981423969999719,
- 0.7499999999999998,
- 0.24743582965269675,
- 0.7999999999999999,
- 0.15430334996209194,
- 0.8819171036881968,
- 0.5714285714285713,
- 0.6117752903214979,
- 0.20412414523193154,
- 0.6666666666666669,
- 0.6030226891555273,
- 0.3585685828003181,
- 0.533001790889026,
- 0.6666666666666666,
- 0.7302967433402215,
- 0.7142857142857141,
- 1.0,
- 0.6,
- 0.2182178902359924,
- 0.4629100498862757,
- 0.6666666666666669,
- 0.40451991747794525,
- 0.1543033499620919,
- 0.9116846116771036,
- 0.5163977794943223,
- 0.6708203932499369,
- 0.2886751345948129,
- 0.0,
- 0.4330127018922194,
- 0.16903085094570333,
- 0.4216370213557839,
- 0.5303300858899106,
- 0.5163977794943223,
- 1.0000000000000002,
- 0.39999999999999997,
- 0.2041241452319315,
- 0.6123724356957946,
- 0.7715167498104596,
- 0.6804138174397717,
- 0.0,
- 1.0000000000000002,
- 0.6123724356957946,
- 0.7745966692414834,
- 0.0,
- 0.6249999999999999,
- 0.4714045207910316,
- 0.0,
- 0.8164965809277261,
- 0.5773502691896258,
- 0.9128709291752769,
- 0.8333333333333335,
- 0.75,
- 0.4714045207910316,
- 0.8333333333333336,
- 0.9999999999999998,
- 0.6666666666666669,
- 0.75,
- 0.3086066999241838,
- 0.47809144373375745,
- 0.4330127018922194,
- 0.11952286093343936,
- 0.9428090415820632,
- 1.0000000000000002,
- 0.7999999999999999,
- 0.0,
- 0.6666666666666669,
- 0.9999999999999998,
- 0.6,
- 0.48304589153964794,
- 0.16724840200141816,
- 0.4285714285714285,
- 0.36514837167011077,
- 0.8660254037844388,
- 0.39999999999999997,
- 0.75,
- 0.7252406676228422,
- 0.36514837167011077,
- 0.39999999999999997,
- 0.0,
- 0.08703882797784893,
- 0.75,
- 0.8660254037844388,
- 0.75,
- 0.17677669529663692,
- 0.5345224838248487,
- 0.6708203932499369,
- 0.25,
- 0.7999999999999999,
- 0.3162277660168379,
- 0.3380617018914066,
- 0.8944271909999159,
- 0.9999999999999998,
- 0.5773502691896258,
- 0.3142696805273545,
- 0.8333333333333336,
- 0.5,
- 0.10540925533894598,
- 0.4472135954999579,
- 0.3779644730092272,
- 0.4472135954999579,
- 0.0,
- 0.595879571531124,
- 0.4082482904638631,
- 0.6708203932499369,
- 0.5163977794943223,
- 0.44721359549995787,
- 0.3726779962499649,
- 0.5000000000000001,
- 0.26726124191242434,
- 0.4472135954999579,
- 0.8660254037844388,
- 0.6172133998483676,
- 0.6,
- 0.2886751345948129,
- 0.888888888888889,
- 0.8153742483272115,
- 0.6,
- 0.916666666666667,
- 0.26013299085723596,
- 0.916666666666667,
- 0.7302967433402215,
- 0.0,
- 0.9486832980505137,
- 0.0,
- 0.22360679774997896,
- 0.7000000000000001,
- 0.6172133998483676,
- 0.5773502691896258,
- 0.8164965809277261,
- 0.6804138174397717,
- 0.31622776601683794,
- 0.75,
- 0.8333333333333336,
- 0.5,
- 0.6788828577642427,
- 0.3380617018914066,
- 0.5,
- 0.0,
- 0.5188745216627709,
- 0.3162277660168379,
- 1.0,
- 0.36514837167011077,
- 0.13363062095621217,
- 0.5163977794943223,
- 0.5,
- 0.30151134457776363,
- 0.6761234037828132,
- 0.47434164902525683,
- 0.6666666666666669,
- 0.17677669529663687,
- 0.3380617018914066,
- 0.6666666666666669,
- 0.0,
- 0.5892556509887897,
- 0.0,
- 0.6708203932499369,
- 0.6201736729460423,
- 0.7216878364870323,
- 0.3333333333333334,
- 0.6,
- 0.6681531047810608,
- 0.18609684207969418,
- 0.3585685828003181,
- 0.6666666666666669,
- 0.1889822365046136,
- 0.7378647873726218,
- 0.25,
- 0.3779644730092272,
- 0.25,
- 0.08111071056538126,
- 0.0,
- 0.857142857142857,
- 0.2886751345948129,
- 0.41812100500354543,
- 0.0,
- 0.4330127018922194,
- 0.0,
- 0.2279211529192759,
- 0.5345224838248487,
- 0.5773502691896258,
- 0.50709255283711,
- 0.0,
- 0.5773502691896258,
- 0.5,
- 1.0000000000000002,
- 0.6708203932499369,
- 0.8581163303210331,
- 0.26726124191242434,
- 0.3333333333333334,
- 0.3086066999241838,
- 0.9197090092274487,
- 0.6761234037828132,
- 0.13608276348795434,
- 0.7745966692414834,
- 0.6681531047810609,
- 0.6804138174397717,
- 0.2279211529192759,
- 0.39999999999999997,
- 0.0,
- 0.3333333333333333,
- 0.8660254037844388,
- 0.4285714285714285,
- 0.492365963917331,
- 0.0,
- 0.18257418583505539,
- 0.8333333333333336,
- 0.25819888974716115,
- 0.1889822365046136,
- 0.7216878364870323,
- 0.6123724356957946,
- 0.5773502691896258,
- 0.5000000000000001,
- 0.4045199174779453,
- 0.6708203932499369,
- 1.0000000000000002,
- 0.5303300858899106,
- 0.20412414523193154,
- 0.8660254037844388,
- 0.09534625892455922,
- 0.12309149097933275,
- 0.5000000000000001,
- 0.9999999999999998,
- 0.5773502691896258,
- 0.5773502691896258,
- 0.5477225575051662,
- 0.7999999999999999,
- 0.5892556509887895,
- 0.8660254037844388,
- 0.08770580193070293,
- 0.14907119849998596,
- 0.4472135954999579,
- 0.5163977794943223,
- 0.1690308509457033,
- 0.07453559924999298,
- 0.0,
- 0.3481553119113957,
- 0.4444444444444444,
- 0.0,
- 0.6708203932499369,
- 0.8164965809277261,
- 0.5773502691896258,
- 0.19999999999999998,
- 0.7559289460184544,
- 0.0,
- 0.7999999999999999,
- 0.19999999999999998,
- 0.8451542547285165,
- 0.5477225575051662,
- 0.5773502691896258,
- 0.2721655269759087,
- 0.8333333333333335,
- 0.6123724356957946,
- 0.8888888888888888,
- 0.4714045207910318,
- 0.5,
- 0.5,
- 0.35355339059327373,
- 0.7715167498104596,
- 0.816496580927726,
- 0.9230769230769231,
- 0.0,
- 0.1543033499620919,
- 0.0,
- 0.7715167498104596,
- 0.8944271909999159,
- 0.5477225575051662,
- 0.4629100498862757,
- 0.3333333333333334,
- 0.4714045207910318,
- 0.7142857142857141,
- 0.6708203932499369,
- 0.4472135954999579,
- 0.15811388300841894,
- 0.3666793988112845,
- 0.11396057645963795,
- 0.3333333333333334,
- 1.0,
- 0.22360679774997896,
- 0.5477225575051662,
- 0.5345224838248487,
- 0.6761234037828132,
- 0.6546536707079772,
- 0.0,
- 0.7142857142857142,
- 0.26726124191242434,
- 0.8660254037844388,
- 0.7302967433402215,
- 0.6666666666666669,
- 0.7999999999999999,
- 0.6,
- 0.8451542547285165,
- 0.1951800145897066,
- 0.3086066999241838,
- 0.0,
- 0.09245003270420485,
- 0.39999999999999997,
- 1.0000000000000002,
- 0.5669467095138407,
- 0.9090909090909092,
- 0.8944271909999159,
- 0.30151134457776363,
- 0.36514837167011077,
- 0.6454972243679029,
- 0.8333333333333336,
- 0.28571428571428564,
- 0.0,
- 0.0,
- 0.2886751345948129,
- 0.6123724356957946,
- 0.0,
- 0.7999999999999999,
- 0.22360679774997896,
- 0.6708203932499369,
- 0.6708203932499369,
- 0.7826237921249264,
- 0.50709255283711,
- 0.7216878364870323,
- 0.5773502691896258,
- 0.7302967433402215,
- 0.6708203932499369,
- 0.9999999999999998,
- 0.6666666666666669,
- 0.5773502691896258,
- 0.50709255283711,
- 0.5976143046671968,
- 0.6249999999999999,
- 0.8660254037844388,
- 0.75,
- 0.0,
- 0.3872983346207417,
- 0.4216370213557839,
- 1.0000000000000002,
- 0.5388159060803247,
- 0.3580574370197164,
- 0.6172133998483676,
- 0.8749999999999998,
- 0.8451542547285165,
- 0.0,
- 0.9128709291752769,
- 0.0,
- 0.6666666666666669,
- 0.6708203932499369,
- 0.0,
- 0.5714285714285713,
- 0.6666666666666669,
- 0.4364357804719848,
- 0.40089186286863654,
- 0.6708203932499369,
- 0.9999999999999999,
- 0.75,
- 0.12309149097933275,
- 0.5000000000000001,
- 0.6708203932499369,
- 0.7071067811865475,
- 0.7071067811865475,
- 0.6708203932499369,
- 0.8944271909999159,
- 0.7142857142857142,
- 0.75,
- 0.6,
- 0.28571428571428564,
- 0.1889822365046136,
- 0.6396021490668312,
- 0.5,
- 0.8660254037844388,
- 0.6172133998483676,
- 0.2886751345948129,
- 0.2886751345948129,
- 0.4472135954999579,
- 0.1178511301977579,
- 0.6172133998483676,
- 0.36514837167011077,
- 0.7999999999999999,
- 0.24253562503633294,
- 0.14907119849998599,
- 0.3779644730092272,
- 0.0,
- 0.39999999999999997,
- 0.4629100498862757,
- 0.0,
- 0.9999999999999999,
- 0.36514837167011077,
- 1.0000000000000002,
- 0.6172133998483676,
- 0.8333333333333336,
- 0.816496580927726,
- 0.3086066999241838,
- 0.6172133998483676,
- 0.5,
- 0.7302967433402215,
- 0.6666666666666669,
- 0.25,
- 0.9258200997725515,
- 0.75,
- 0.0,
- 0.5039526306789696,
- 0.2886751345948129,
- 0.5,
- 0.5163977794943223,
- 0.4714045207910318,
- 0.5222329678670935,
- 0.5185629788417315,
- 0.8153742483272114,
- 0.7006490497453707,
- 0.7999999999999999,
- 0.0,
- 0.5669467095138407,
- 0.6708203932499369,
- 0.8728715609439696,
- 0.1767766952966369,
- 1.0,
- 1.0,
- 0.0,
- 0.39999999999999997,
- 0.2581988897471611,
- 0.5000000000000001,
- 0.6708203932499369,
- 0.47809144373375745,
- 0.6761234037828132,
- 0.8660254037844388,
- 0.408248290463863,
- 1.0000000000000002,
- 0.5698028822981898,
- 0.7999999999999999,
- 0.6708203932499369,
- 0.22360679774997896,
- 0.6666666666666669,
- 0.6324555320336758,
- 0.75,
- 0.31622776601683794,
- 0.5773502691896257,
- 0.8944271909999159,
- 0.6,
- 0.3380617018914066,
- 0.4242640687119285,
- 0.2886751345948129,
- 0.2051956704170308,
- 0.6708203932499369,
- 0.26726124191242434,
- 0.6708203932499369,
- 0.8944271909999159,
- 1.0,
- 0.816496580927726,
- 0.4444444444444444,
- 0.629940788348712,
- 0.0,
- 0.2721655269759087,
- 0.20965696734438366,
- 0.4330127018922194,
- 0.8660254037844388,
- 0.3086066999241838,
- 0.3333333333333334,
- 0.21081851067789195,
- 0.3333333333333334,
- 0.7999999999999999,
- 0.75,
- 0.20412414523193154,
- 0.50709255283711,
- 0.9999999999999999,
- 0.7537783614444091,
- 0.4472135954999579,
- 0.4999999999999999,
- 0.5773502691896258,
- 0.6123724356957946,
- 0.3779644730092272,
- 0.6708203932499369,
- 0.7216878364870323,
- 0.6708203932499369,
- 0.5477225575051662,
- 0.39999999999999997,
- 0.8660254037844388,
- 0.4330127018922194,
- 0.75,
- 0.2357022603955159,
- 0.0,
- 0.8944271909999159,
- 1.0,
- 0.6123724356957946,
- 0.6666666666666669,
- 0.6666666666666669,
- 0.6,
- 0.9999999999999999,
- 0.3380617018914066,
- 0.0,
- 0.5241424183609591,
- 0.5773502691896258,
- 0.75,
- 0.7999999999999999,
- 0.0,
- 0.75,
- 0.5,
- 0.7205766921228922,
- 0.8333333333333336,
- 0.2886751345948129,
- 0.0,
- 0.09805806756909201,
- 0.6708203932499369,
- 0.5,
- 0.2981423969999719,
- 0.19999999999999998,
- 0.6708203932499369,
- 0.0,
- 0.8451542547285165,
- 0.2860387767736777,
- 0.8749999999999998,
- 0.9128709291752771,
- 0.09622504486493764,
- 0.3162277660168379,
- 0.3928371006591931,
- 0.9999999999999999,
- 0.329914439536929,
- 0.5270462766947299,
- 0.17541160386140586,
- 0.6,
- 0.0,
- 0.6,
- 0.8333333333333336,
- 0.22360679774997896,
- 0.4472135954999579,
- 0.4714045207910318,
- 0.2886751345948129,
- 0.0,
- 0.3380617018914066,
- 0.8660254037844388,
- 0.5892556509887895,
- 0.0,
- 0.0,
- 0.558156305651438,
- 0.1336306209562122,
- 0.5163977794943223,
- 0.0,
- 0.5477225575051662,
- 0.9128709291752771,
- 0.31025261399701143,
- 0.7745966692414834,
- 0.7999999999999999,
- 0.6708203932499369,
- 0.7999999999999999,
- 0.0936585811581694,
- 0.8944271909999159,
- 0.7071067811865477,
- 0.273861278752583,
- 0.6666666666666669,
- 0.2519763153394848,
- 0.7999999999999999,
- 0.32732683535398865,
- 0.0,
- 0.6396021490668312,
- 0.36514837167011077,
- 0.2357022603955159,
- 1.0,
- 0.6030226891555273,
- 0.6,
- 0.5345224838248487,
- 0.6666666666666669,
- 0.2611164839335468,
- 0.75,
- 0.329914439536929,
- 0.6172133998483676,
- 0.8451542547285165,
- 0.6708203932499369,
- 1.0000000000000002,
- 0.3086066999241838,
- 0.8749999999999998,
- 0.0,
- 0.0,
- 0.8164965809277261,
- 0.5345224838248487,
- 0.9999999999999999,
- 0.5773502691896258,
- 0.27801921874276636,
- 0.4472135954999579,
- 0.7142857142857141,
- 0.6681531047810608,
- 0.7142857142857142,
- 0.816496580927726,
- 0.15811388300841894,
- 0.0,
- 0.6172133998483676,
- 0.3464101615137754,
- 0.6666666666666669,
- 0.7142857142857142,
- 0.7302967433402215,
- 0.6708203932499369,
- 0.25819888974716115,
- 0.857142857142857,
- 0.9999999999999999,
- 0.8696263565463043,
- 0.6708203932499369,
- 0.25819888974716115,
- 0.36514837167011077,
- 0.816496580927726,
- 0.8333333333333336,
- 0.5477225575051662,
- 0.408248290463863,
- 0.36514837167011077,
- 1.0,
- 0.6681531047810609,
- 0.7715167498104596,
- 0.8944271909999157,
- 0.75,
- 0.816496580927726,
- 0.0,
- 0.9258200997725515,
- 0.0,
- 0.47434164902525683,
- 0.3086066999241838,
- 0.0975900072948533,
- 0.2886751345948129,
- 0.20412414523193154,
- 0.6172133998483676,
- 0.816496580927726,
- 0.7302967433402215,
- 0.565685424949238,
- 0.0,
- 0.7559289460184544,
- 0.5773502691896258,
- 0.7999999999999999,
- 0.6123724356957946,
- 0.36514837167011077,
- 0.23145502494313785,
- 0.9428090415820632,
- 0.6708203932499369,
- 0.6666666666666669,
- 0.5547001962252291,
- 0.11785113019775793,
- 0.3333333333333334,
- 0.0,
- 0.12909944487358058,
- 0.5773502691896258,
- 0.75,
- 0.0,
- 0.9128709291752769,
- 0.0,
- 0.0,
- 0.857142857142857,
- 0.8944271909999159,
- 0.75,
- 0.1951800145897066,
- 0.7999999999999999,
- 0.12499999999999997,
- 0.0944911182523068,
- 0.6666666666666669,
- 0.36563621206356534,
- 0.18181818181818182,
- 0.7777777777777779,
- 0.8333333333333336,
- 0.2519763153394848,
- 0.7378647873726218,
- 0.5477225575051662,
- 0.19364916731037082,
- 0.3333333333333334,
- 0.7745966692414834,
- 0.8249579113843053,
- 0.8944271909999159,
- 0.2357022603955159,
- 0.7302967433402215,
- 0.24253562503633294,
- 0.8660254037844388,
- 0.1666666666666667,
- 0.35355339059327373,
- 0.4472135954999579,
- 0.75,
- 0.36927447293799825,
- 0.0,
- 0.36514837167011077,
- 0.7715167498104596,
- 0.6708203932499369,
- 0.6172133998483676,
- 0.5345224838248487,
- 0.6,
- 0.4743416490252569,
- 0.39999999999999997,
- 0.816496580927726,
- 0.10050378152592121,
- 0.6666666666666669,
- 0.13363062095621217,
- 0.14433756729740646,
- 0.7999999999999999,
- 1.0000000000000002,
- 0.6,
- 0.816496580927726,
- 0.6761234037828132,
- 0.0,
- 0.0,
- 0.8660254037844388,
- 0.44721359549995787,
- 0.4330127018922194,
- 0.6,
- 0.0,
- 0.6804138174397717,
- 0.0,
- 0.7999999999999999,
- 0.7216878364870323,
- 0.6,
- 0.22360679774997902,
- 0.0,
- 0.3779644730092272,
- 0.6708203932499369,
- 0.5345224838248487,
- 0.0,
- 0.7216878364870323,
- 1.0,
- 1.0,
- 0.0,
- 0.6,
- 0.912870929175277,
- 0.7715167498104596,
- 0.4082482904638631,
- 0.7745966692414834,
- 0.30316953129541624,
- 0.6123724356957946,
- 0.8333333333333336,
- 0.0,
- 0.8333333333333335,
- 0.75,
- 0.6,
- 0.502518907629606,
- 0.75,
- 1.0,
- 0.25,
- 0.7302967433402215,
- 0.75,
- 0.4472135954999579,
- 0.1690308509457033,
- 0.7302967433402215,
- 1.0000000000000002,
- 0.0,
- 0.13363062095621217,
- 0.8660254037844388,
- 0.8660254037844388,
- 0.6,
- 0.5773502691896258,
- 0.3721042037676254,
- 0.7999999999999999,
- 0.0,
- 0.8944271909999159,
- 0.7216878364870323,
- 0.857142857142857,
- 0.916666666666667,
- 0.3333333333333333,
- 0.75,
- 0.3333333333333334,
- 0.6708203932499369,
- 0.20412414523193154,
- 0.7999999999999999,
- 0.8333333333333336,
- 0.1889822365046136,
- 0.9999999999999999,
- 0.20412414523193154,
- 0.38138503569823695,
- 0.2886751345948129,
- 0.8660254037844388,
- 0.8660254037844388,
- 0.5477225575051662,
- 0.5669467095138407,
- 0.2886751345948129,
- 0.1543033499620919,
- 0.0,
- 0.11952286093343936,
- 0.0,
- 0.5185629788417315,
- 0.0,
- ...]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">distancesq1iq2i</span> <span class="o">=</span> <span class="n">count_cosine_dist_between_two_dfs</span><span class="p">(</span><span class="n">df_clean_vectorized_cv_q1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:],</span> <span class="n">df_clean_vectorized_cv_q2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Array of distances between q1_i and q2_i has length {len(distancesq1iq2i)} - should be {len(df_clean_vectorized_cv_q1)}&#39;</span><span class="p">)</span>
+<span class="n">distancesq1iq2i</span> <span class="o">=</span> <span class="n">count_cosine_dist_between_two_dfs</span><span class="p">(</span><span class="n">df_p_vectorized_q1</span><span class="p">,</span> <span class="n">df_p_vectorized_q2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Array of distances between q1_i and q2_i has length {len(distancesq1iq2i)} - should be {len(df_p_vectorized_cv_q1)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;First 10 questions have cosine distance: </span><span class="se">\n</span><span class="si">{distancesq1iq2i[:10]}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15619,6 +14526,8 @@ Count Vectorizer/bag of words shape (523984, 79161)
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Array of distances between q1_i and q2_i has length 10000 - should be 10000
+First 10 questions have cosine distance: 
+[0.10557280900008414, 0.7113248654051871, 0.2254033307585166, 1.0, 0.5000000000000001, 0.0, 1.0, 1.0, -2.220446049250313e-16, 0.6464466094067263]
 </pre>
 </div>
 </div>
@@ -15636,7 +14545,7 @@ Count Vectorizer/bag of words shape (523984, 79161)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#distance_target = pd.DataFrame([distancesq1iq2i, df_clean.is_duplicate[:10000].values], columns= [&#39;dist&#39;, &#39;target&#39;])</span>
@@ -15654,7 +14563,7 @@ Count Vectorizer/bag of words shape (523984, 79161)
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[77]:</div>
 
 
 
@@ -15684,42 +14593,42 @@ Count Vectorizer/bag of words shape (523984, 79161)
   <tbody>
     <tr>
       <td>count</td>
-      <td>10000.000000</td>
+      <td>1.000000e+04</td>
       <td>10000.000000</td>
     </tr>
     <tr>
       <td>mean</td>
-      <td>0.525458</td>
+      <td>4.621645e-01</td>
       <td>0.371100</td>
     </tr>
     <tr>
       <td>std</td>
-      <td>0.275435</td>
+      <td>3.305596e-01</td>
       <td>0.483123</td>
     </tr>
     <tr>
       <td>min</td>
-      <td>0.000000</td>
+      <td>-2.220446e-16</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <td>25%</td>
-      <td>0.333333</td>
+      <td>1.835034e-01</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <td>50%</td>
-      <td>0.547723</td>
+      <td>4.226497e-01</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <td>75%</td>
-      <td>0.750000</td>
+      <td>7.113249e-01</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <td>max</td>
-      <td>1.000000</td>
+      <td>1.000000e+00</td>
       <td>1.000000</td>
     </tr>
   </tbody>
@@ -15735,7 +14644,7 @@ Count Vectorizer/bag of words shape (523984, 79161)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">distance_target</span><span class="o">.</span><span class="n">distance</span>
@@ -15750,7 +14659,7 @@ Count Vectorizer/bag of words shape (523984, 79161)
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Classification report after PR: </span><span class="se">\n</span><span class="s1">{classification_report(y_test, y_pred)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Classification report after LR: </span><span class="se">\n</span><span class="s1">{classification_report(y_test, y_pred)}&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Confusion matrix after LR: </span><span class="se">\n</span><span class="s1">{confusion_matrix(y_test, y_pred)}&#39;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
@@ -15759,8 +14668,8 @@ Count Vectorizer/bag of words shape (523984, 79161)
 <span class="n">y_predrf</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Classification report after PR: </span><span class="se">\n</span><span class="s1">{classification_report(y_test, y_predrf)}&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Confusion matrix after LR: </span><span class="se">\n</span><span class="s1">{confusion_matrix(y_test, y_predrf)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Classification report after RF: </span><span class="se">\n</span><span class="s1">{classification_report(y_test, y_predrf)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Confusion matrix after RF: </span><span class="se">\n</span><span class="s1">{confusion_matrix(y_test, y_predrf)}&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15785,36 +14694,95 @@ Name: target, dtype: float64,
 0    63.64
 1    36.36
 Name: target, dtype: float64
-Classification report after PR: 
+Classification report after LR: 
               precision    recall  f1-score   support
 
-           0       0.72      0.78      0.75      1591
-           1       0.56      0.48      0.51       909
+           0       0.69      0.79      0.74      1591
+           1       0.52      0.39      0.45       909
 
-    accuracy                           0.67      2500
-   macro avg       0.64      0.63      0.63      2500
-weighted avg       0.66      0.67      0.67      2500
+    accuracy                           0.65      2500
+   macro avg       0.61      0.59      0.59      2500
+weighted avg       0.63      0.65      0.63      2500
 
 Confusion matrix after LR: 
-[[1244  347]
- [ 474  435]]
-Classification report after PR: 
+[[1258  333]
+ [ 553  356]]
+Classification report after RF: 
               precision    recall  f1-score   support
 
-           0       0.77      0.72      0.75      1591
-           1       0.56      0.63      0.59       909
+           0       0.68      0.80      0.74      1591
+           1       0.50      0.35      0.41       909
 
-    accuracy                           0.69      2500
-   macro avg       0.67      0.68      0.67      2500
-weighted avg       0.70      0.69      0.69      2500
+    accuracy                           0.64      2500
+   macro avg       0.59      0.57      0.57      2500
+weighted avg       0.62      0.64      0.62      2500
 
-Confusion matrix after LR: 
-[[1149  442]
- [ 338  571]]
+Confusion matrix after RF: 
+[[1268  323]
+ [ 589  320]]
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.-Let's-try-to-add-Levenstein">5. Let's try to add Levenstein<a class="anchor-link" href="#5.-Let's-try-to-add-Levenstein">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lev_dist</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">):</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">a1</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">target</span><span class="o">=</span><span class="n">a2</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+
+    <span class="c1"># Prepare a matrix</span>
+    <span class="n">slen</span><span class="p">,</span> <span class="n">tlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tlen</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">slen</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">slen</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tlen</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+
+    <span class="c1"># Counting distance, here is my function</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">slen</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tlen</span><span class="p">):</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">source</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+                            <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1"># deletion</span>
+                            <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1"># insertion</span>
+                            <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">cost</span>   <span class="c1"># substitution</span>
+                        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span>\
+           <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+<span class="c1">#df = pd.read_csv(&#39;preprocess_all.csv&#39;).dropna()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lev_dist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">lev_dist</span><span class="p">)(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;preprocessed_q1&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;preprocessed_q2&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;preprocess_all_lev.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lev_pred&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lev_pred&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">lev_dist</span> <span class="o">&lt;</span> <span class="mf">0.35</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;lev_pred&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;lev_pred&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lev_true&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">lev_pred</span> <span class="o">==</span><span class="n">df</span><span class="o">.</span><span class="n">is_duplicate</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;lev_true&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
