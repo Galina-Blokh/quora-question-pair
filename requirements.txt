@@ -29,3 +29,5 @@ decorator~=4.4.2
 setuptools~=40.8.0
 ipython~=7.14.0
 argparse~=1.4.0
+flair~=0.5
+fasttext~=0.9.2
