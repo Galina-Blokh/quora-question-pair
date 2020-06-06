@@ -18,8 +18,7 @@ class Embeder:
     def embed_sent(self, sent):
         sentence = Sentence(sent)
         self.document_embeddings.embed(sentence)
-        vector = sentence.get_embedding().cpu().detach().numpy()
-        return vector
+        return sentence.get_embedding().cpu().detach().numpy()
 
 
 def vectorize_file_csv(input_file, output_file):
