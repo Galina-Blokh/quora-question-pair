@@ -32,6 +32,8 @@ y_pred = rfc.predict(X_test)
 print('\n clasification report (RFC (200 est) + fast_text_vectors:\n',\
         classification_report(y_test, y_pred))
 
+pickle.dump(rfc, open("rfc_for_probas.pkl", 'wb'))
+
 ### Calculate predict probas to  calculate log_loss and use them as a feature
 
 rfc_probas_train = rfc.predict_proba(X_train)
