@@ -27,14 +27,14 @@ y_test = df_test['is_duplicate']
 y_train = df_train['is_duplicate']
 
 ### train model only on fasttext vectors
-print("Start training RFC on fast_text")
-#rfc = RandomForestClassifier(n_estimators = 600,n_jobs = 8)
-#rfc.fit(X_train, y_train)
-#y_pred = rfc.predict(X_test)
-#print('\n clasification report (RFC (200 est) + fast_text_vectors:\n',\
-#        classification_report(y_test, y_pred))
+print("Start training RFC")
+rfc = RandomForestClassifier(n_estimators = 600,n_jobs = 8, min_samples_split = 10, class_weight = {0:1, 1:2})
+rfc.fit(X_train[:100000], y_train[:100000])
+y_pred = rfc.predict(X_test)
+print('\n clasification report (RFC (200 est) + fast_text_vectors:\n',\
+        classification_report(y_test, y_pred))
 
-#pickle.dump(rfc, open("rfc_for_probas.pkl", 'wb'))
+pickle.dump(rfc, open("rfc_for_probas.pkl", 'wb'))
 rfc = pickle.load( open("rfc_for_probas.pkl", 'rb'))
 
 ### Calculate predict probas to  calculate log_loss and use them as a feature
@@ -54,8 +54,7 @@ df_test['rfc_probas_0'] = rfc_probas_test_0
 
 
 ### Train final classificator
-print("Train final RFC")
-feats=['ner_score','lev_dist','cos_dist','score', 'rfc_probas_0']
+feats=['ner_score','lev_dist','cos_dist','score','rfc_probas_0']
 
 rfc_c_p = RandomForestClassifier(n_estimators = 100, class_weight = {0:2, 1:10},\
                                  min_samples_split = 8, min_samples_leaf = 2)
@@ -66,8 +65,8 @@ y_pred_c_p = rfc_c_p.predict(df_test[feats])
 print('\n clasification report (RFC cw 2,10 + cosine distance + WER + predict_probas + NER:\n',\
         classification_report(y_test, y_pred_c_p))
 
-rfc_c_p = RandomForestClassifier(n_estimators = 1000, class_weight = {0:2, 1:10},\
-                                 min_samples_split = 50, min_samples_leaf = 2)
+rfc_c_p = RandomForestClassifier(n_estimators = 50, class_weight = {0:2, 1:10},\
+                                 min_samples_split = 500, min_samples_leaf = 4)
 rfc_c_p.fit(df_train[feats],y_train)
 y_pred_c_p = rfc_c_p.predict(df_test[feats])
 
@@ -76,13 +75,13 @@ rfc_c_p_probas_test = rfc_c_p.predict_proba(df_test[feats])
 log_los_rfc = log_loss(y_test, rfc_c_p_probas_test)
 print('Log loss:', round(log_los_rfc,2))
 
-print('\n clasification report (RFC wc 3,6 + cosine distance + WER + predict_probas + NER:\n',\
+print('\n clasification report (RFC wc 2,10 + cosine distance + WER + predict_probas + NER:\n',\
         classification_report(y_test, y_pred_c_p))
 
 
 #### XGBOOST
-print("Start training XGBoost")
-xgb_aut = XGBClassifier(n_estimators=400)
+print("XGBoost")
+xgb_aut = XGBClassifier(n_estimators=100,eta=0.1, scale_pos_weight =5, eval_metric='auc',max_depth=10)
 xgb_aut.fit(df_train[feats],y_train)
 y_pred_xgb = xgb_aut.predict(df_test[feats])
 
@@ -92,3 +91,6 @@ print('Log loss:', round(log_los_xgb,2))
 
 print('\n clasification report (XGB wc 3,6 + cosine distance + WER + predict_probas + NER:\n',\
         classification_report(y_test, y_pred_xgb))
+print(xgb_aut.feature_importances_)
+for i,f in enumerate(feats):
+   print(f,xgb_aut.feature_importances_[i])
