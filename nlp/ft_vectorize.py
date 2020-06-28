@@ -8,9 +8,9 @@ from scipy.spatial.distance import cosine
 import pickle
 
 class Embeder:
-    def __init__(self):
+    def __init__(self, model_file = '../models/crawl-300d-2M-subword.bin'):
         #https://dl.fbaipublicfiles.com/fasttext/vectors-english/crawl-300d-2M-subword.zip
-        embedding = FastTextEmbeddings('../models/crawl-300d-2M-subword.bin')
+        embedding = FastTextEmbeddings(model_file)
         # embedding = WordEmbeddings('glove')
         self.document_embeddings = DocumentPoolEmbeddings([embedding])
 

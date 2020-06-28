@@ -32,11 +32,13 @@ def preprocess_file_csv(input_file, output_file):
 
 @timeit
 def preprocess_sent(sent):
-    toks = (SpacyTokens(sent)
+    toks = (
+        SpacyTokens(sent)
             .lower()
             .remove_all(stop_words, punct)
             .lemmatize()
-            .remove_all(stop_words))
+            .remove_all(stop_words)
+            )
     list_of_strings = [i.text for i in toks]
     return " ".join(list_of_strings)
 
@@ -110,9 +112,5 @@ def preprocess_file_csv4(input_file, output_file):
 
 
 if __name__ == '__main__':
-    from fuzzywuzzy import fuzz
-
-    print(fuzz.ratio("zzz aaa", "zzz aab"))
-    # df = pd.read_csv("../notebooks/maria/train_dup.csv")[:100]
-    preprocess_file_csv("../notebooks/maria/train_dup.csv", "preprocess_all2.csv")
-    # preprocess_file_csv("../notebooks/maria/train_dup.csv", "preprocess2500.csv")
+    #preprocess_file_csv("../notebooks/maria/train_dup.csv", "preprocess_all2.csv")
+    preprocess_sent3("This is a test")

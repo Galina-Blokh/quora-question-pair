@@ -33,7 +33,7 @@ class NER:
         for ent in doc.ents:
             result.append(ent.text)
             #result.append(ent.label_ + ' ' + ent.text)    <-- return both NERs and NER-tags
-        return "|".join(result)
+        return "|".join(result).lower()
 
     def ner_score(self,str_1, str_2):
         """
