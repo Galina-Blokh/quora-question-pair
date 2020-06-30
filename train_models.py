@@ -16,37 +16,35 @@ from sklearn.metrics import classification_report
 from scipy.spatial.distance import cosine
 
 LOG_FILE = 'train_model.log'
+FEATS = ['ner_score', 'wer', 'cos_dist', 'cos_dist_lem', 'rfc_probas_0']
 
-# Pipline:
-# Tokenization + lematization ( preprocess_data.preprocess_file_csv3)
-# Levinshtain distance (wer_lev) (on lemmatized questions)
-# NER (ner.ner_df_file_pkl) (on non-lemmatizeed questions)
-# FastText vectors non lematized (ft_vectorize.vectorize_file_csv)
-# FastText  non lematized cos distance (ft_vectorize.cosine_dist)
-# FastText lematized vecs+cosin dist  (ft_vectorize_lemma.cosine_dist vectorize_file_pkl)
-# Encoder-decoder score (uni_encoder.py)
-
-# Train your model (rfc_final.py - RFC)
 
 class SingleFeatsExctractor:
     def __init__(self, ft_model_file):
         self.ner_extractor = ner.NER()
         self.ft_vectorizer = ft_vectorize.Embeder(ft_model_file)
 
-    def exctract_feats_from_text(self, str):
+    def exctract_feats_from_text(self, text_str):
         """
         tokenization, lemmatization, FastText vectors, NER (without NER score)
         :param str: text
         :return: features
         """
-        feats = {}
-        feats['lem_str'] = preprocess_data.preprocess_sent3(str)
-        feats['ner'] = self.ner_extractor.recognize(str)
-        feats['ft_vector'] = self.ft_vectorizer.embed_sent(str)
-        feats['ft_vector_lem'] = self.ft_vectorizer.embed_sent(feats['lem_str'])
+        feats = {'lem_str' : "", 'ner' : "", 'ft_vector':np.zeros(self.ft_vectorizer.dim),\
+                 'ft_vector_lem' : np.zeros(self.ft_vectorizer.dim)}
+        if(len(text_str)) == 0:
+          return feats
+        feats['lem_str'] = preprocess_data.preprocess_sent3(str(text_str))
+        feats['ner'] = self.ner_extractor.recognize(str(text_str))
+        try:
+            feats['ft_vector'] = self.ft_vectorizer.embed_sent(str(text_str))
+            feats['ft_vector_lem'] = self.ft_vectorizer.embed_sent(feats['lem_str'])
+        except:
+            logger.warning("Failed extract vectors." + str(text_str))
+            return feats
         return feats
 
-def extract_single_train_feats(input_file, ft_model, out_pikle='single_feats.pkl'):
+def extract_single_train_feats(input_file, ft_model, out_pikle='models/single_feats.pkl'):
     extractor = SingleFeatsExctractor(ft_model)
     logger.info("Load data.")
     df = pd.read_csv(input_file)
@@ -72,7 +70,7 @@ def extract_single_train_feats(input_file, ft_model, out_pikle='single_feats.pkl
     logger.info('Single feats saved to single_feats.pkl')
 
 
-def train_on_vecs(pkl_file='single_feats.pkl', out_file ='rfc_for_probas.pkl'):
+def train_on_vecs(pkl_file='models/single_feats.pkl', out_file ='models/rfc_for_probas.pkl'):
 
     df = pickle.load(open(pkl_file, 'rb'))
     df_train, df_test = train_test_split(df, test_size=0.10,random_state=13)
@@ -100,12 +98,13 @@ def train_on_vecs(pkl_file='single_feats.pkl', out_file ='rfc_for_probas.pkl'):
 
 
 class PairFeatsExctractor:
-    def __init__(self, pair_model_file='rfc_for_probas.pkl'):
-        self.ner_extractor = ner.NER()
+    def __init__(self, pair_model_file='models/rfc_for_probas.pkl',logger=logging.getLogger("extract")):
         self.rfc = pickle.load(open(pair_model_file, 'rb'))
+        self.logger = logger
 
 
-    def train_final_model(self,df_train, df_test,out_model_file='rfc_final.pkl'):
+    def train_final_model(self, df_train, df_test, out_model_file='models/rfc_final.pkl'):
+        df_train = df_train.dropna()
         X_train = np.concatenate((np.stack(df_train['ft_vector_lem_q1'].to_numpy(), axis=0), \
                                   np.stack(df_train['ft_vector_lem_q2'].to_numpy(), axis=0)), axis=1)
         X_test = np.concatenate((np.stack(df_test['ft_vector_lem_q1'].to_numpy(), axis=0), \
@@ -123,27 +122,27 @@ class PairFeatsExctractor:
         df_train['rfc_probas_0'] = rfc_probas_train_0
         df_test['rfc_probas_0'] = rfc_probas_test_0
 
-        feats = ['ner_score', 'wer', 'cos_dist', 'cos_dist_lem', 'rfc_probas_0']
         logger.info("Train columns")
         logger.info(str(df_train.columns))
         logger.info("Train fetas:")
-        logger.info(str(feats))
+        logger.info(str(FEATS))
         # print(df.info())
 
         # feats=['score']
 
         rfc_final = RandomForestClassifier(n_estimators=100, class_weight={0: 2, 1: 10}, \
                                            min_samples_split=8, min_samples_leaf=2)
-        rfc_final.fit(df_train[feats], y_train)
-        y_pred_final = rfc_final.predict(df_test[feats])
+        rfc_final.fit(df_train[FEATS], y_train)
+        y_pred_final = rfc_final.predict(df_test[FEATS].fillna(1))
 
         logger.info('\n clasification report (RFC cw 2,10 + cosine distance + WER + predict_probas + NER:\n' \
                     + str(classification_report(y_test, y_pred_final)))
         pickle.dump(rfc_final, open(out_model_file, 'wb'))
         logger.info('rfc_final saved to rfc_final.pkl')
 
+
     def extract_pair_train_feats(self, input_pkl):
-        logger.info("Extracting pair feats.")
+        self.logger.info("Extracting pair feats.")
         df = pickle.load(open(input_pkl, 'rb'))
         df_train, df_test = train_test_split(df, test_size=0.10, random_state=13)
         df_train = self.extract_pair_feats(df_train)
@@ -151,19 +150,16 @@ class PairFeatsExctractor:
         self.train_final_model(df_train,df_test)
 
     def extract_pair_feats(self, df):
-        logger.info("Loaded dataframe from pikle")
+        self.logger.info("Loaded dataframe from pikle")
         df['cos_dist'] = np.vectorize(cosine)(df['ft_vector_q1'], df['ft_vector_q2'])
-        logger.info("Calculated cosine distance for non-lemmatized ft vectors")
+        self.logger.info("Calculated cosine distance for non-lemmatized ft vectors")
         df['cos_dist_lem'] = np.vectorize(cosine)(df['ft_vector_lem_q1'], df['ft_vector_lem_q2'])
-        logger.info("Calculated cosine distance for lemmatized ft vectors")
+        self.logger.info("Calculated cosine distance for lemmatized ft vectors")
         df['wer'] = np.vectorize(wer_lev.lev_dist)(df['lem_str_q1'], df['lem_str_q2'])
-        logger.info("Calculated WER for lemmatized ft vectors")
-        df['ner_score'] = np.vectorize(self.ner_extractor.ner_score)(df['ner_q1'], \
+        self.logger.info("Calculated WER for lemmatized ft vectors")
+        df['ner_score'] = np.vectorize(ner.NER.ner_score)(df['ner_q1'], \
                                                              df['ner_q2'])
         return df
-
-
-
 
 
 
@@ -191,11 +187,11 @@ if __name__ == '__main__':
     parser.add_argument('--train_csv', type=str, help='File with question pairs for training', action="store",
                         default='train_dup.csv')
     parser.add_argument('--embed_model', type=str, help='Fasttext unsupervised model',
-                        default='models/small_en.bin')
+                        default='models/model_corpus_lemmatized.bin')
     parser.add_argument('--rfc_ft_vectors', type=str, help='Where to store model ft_vectors model',
-                        default='rfc_for_probas.pkl')
+                        default='models/rfc_for_probas.pkl')
     parser.add_argument('--single_feats', type=str, help='Where to store df with single feats',
-                        default='single_feats.pkl')
+                        default='models/single_feats.pkl')
     # parser.add_argument('--competitions_api_file', type=str, help='Where to store data for competitions from API',
     #                     default='competitions_api_file.csv')
     # parser.add_argument('--kernels_file', type=str, help='Where to store kernels from competition page',

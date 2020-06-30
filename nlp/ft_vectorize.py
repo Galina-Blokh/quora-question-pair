@@ -11,6 +11,7 @@ class Embeder:
     def __init__(self, model_file = '../models/crawl-300d-2M-subword.bin'):
         #https://dl.fbaipublicfiles.com/fasttext/vectors-english/crawl-300d-2M-subword.zip
         embedding = FastTextEmbeddings(model_file)
+        self.dim = embedding.embedding_length
         # embedding = WordEmbeddings('glove')
         self.document_embeddings = DocumentPoolEmbeddings([embedding])
 

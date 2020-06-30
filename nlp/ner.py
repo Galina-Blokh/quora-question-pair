@@ -35,7 +35,8 @@ class NER:
             #result.append(ent.label_ + ' ' + ent.text)    <-- return both NERs and NER-tags
         return "|".join(result).lower()
 
-    def ner_score(self,str_1, str_2):
+    @staticmethod
+    def ner_score(str_1, str_2):
         """
         calculating NER-score: (equal NERs - different NERs)/ all NERS.
     equal - set of NERs are in q1 and q2, different - set of NERs are only in q1 or on;y in q2
