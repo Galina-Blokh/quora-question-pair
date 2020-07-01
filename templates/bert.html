@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>Bert</h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+    <form action="/bert" id="sendData" enctype="multipart/form-data" method="post">
+        <p>
+            <label>Sentence#1</label>
+            <textarea class="form-control" name="sentence1"></textarea>
+        </p>
+        <p>
+            <label>Sentence#2</label>
+            <textarea class="form-control" name="sentence2"></textarea>
+        </p>
+        <p>
+            <button class="btn btn-primary" id="submitButton" type="submit">Check</button>
+        </p>
+        <p>
+        <div id="result"></div>
+        </p>
+    </form>
+    <script type=text/javascript>
+        $(function () {
+            $('button#submitButton').bind('click', function () {
+                $.getJSON('/_bert_viz', {
+                    sentence1: $('textarea[name="sentence1"]').val(),
+                    sentence2: $('textarea[name="sentence2"]').val()
+                }, function (data) {
+                    $("#result").append(data.result);
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

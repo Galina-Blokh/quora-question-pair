@@ -1,71 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pair you question</title>
-    <style type="text/css">
-        body {
-            background-color: #3a3a3a;
-            margin: 0;
-            padding: 0;
-            vertical-align: middle;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        .input {
-            color: white;
-            background-color: rgba(0, 0, 0, 0.2);
-            border: none;
-            border-bottom: 2px solid white;
-            /*border-radius: 0;*/
-            transition: border-bottom 0.2s;
-            padding: 7px 0;
-            font-size: 30px;
-            width: 100%;
-        }
-        .input:focus {
-            /*border-bottom: 2px solid;*/
-            /*border-image-slice: 1;*/
-            /*border-image-source: linear-gradient(45deg, #da26ff, #2100b5);*/
-            border-bottom: 2px solid #8100b8;
-        }
-        .submit {
-            width: 100%;
-            color: white;
-            border: none;
-            font-size: 30px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-        .submit:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        .submit:active {
-            background-color: rgba(0, 0, 0, 0.01);
-        }
-        .content {
-            background-color: rgba(0, 0, 0, 0.2);
-            /*height: 110px;*/
-            width: 70vw;
-        }
-        .center {
-            position: fixed;
-            top: 40vh;
-            left: 15vw;
-  /*border: 3px solid green;*/
-        }
-    </style>
-</head>
-<body>
-<div class="center">
-    <div class="content">
-        <form action="/" method="post">
-            <input class="input" name="question" type="text" placeholder="Find a similar question"/>
-            <br>
-            <input class="submit" type="submit" value="Find" >
-        </form>
-    </div>
-    </div>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>Duplicate detecting</h1>
+    <form action="/analyze" id="sendData" enctype="multipart/form-data" method="post">
+        <p>
+            <label>Sentence#1</label>
+            <textarea class="form-control" name="sentence1"></textarea>
+        </p>
+        <p>
+            <label>Sentence#2</label>
+            <textarea class="form-control" name="sentence2"></textarea>
+        </p>
+        <p>
+            <button class="btn btn-primary" id="submitButton" type="submit">Check</button>
+        </p>
+    </form>
+    <script>
+        $('#submitButton').click(function () {
+            $.ajax({
+                {#url: '/analyze',#}
+                type: 'post',
+                dataType: 'json',
+                data: $('form#sendData').serialize(),
+                success: function (data) {
+                    log.debug(data)
+                }
+            });
+        });
+    </script>
+{% endblock %}

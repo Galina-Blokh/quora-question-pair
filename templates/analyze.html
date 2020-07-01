@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>Duplicate detecting</h1>
+    {% if res['score'] > 50 %}
+        <p class="alert alert-success">
+            Those sentences are pretty similar.
+        </p>
+    {% else %}
+        <p class="alert alert-info">
+            Those sentences are differents.
+        </p>
+    {% endif %}
+
+    <h2>Raw Scores</h2>
+    <p>
+        Score: <b>{{ res['score'] }}%</b>
+    </p>
+    <p>
+        Sentence1: <b>{{ res['sentence1'] }}</b>
+    </p>
+    <p>
+        Sentence2: <b>{{ res['sentence2'] }}</b>
+    </p>
+
+{% endblock %}

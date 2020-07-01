@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>Similarities</h1>
+
+    <p>
+        <label>Question</label>
+        <textarea class="form-control" name="sentence"></textarea>
+    </p>
+    <p>
+        <button class="btn btn-primary" id="submitButton" type="submit">Find</button>
+    </p>
+    <p>
+    <div id="result"></div>
+    </p>
+
+    <script>
+        $(function () {
+            $('button#submitButton').bind('click', function () {
+                $.getJSON('/_get_similarities', {
+                    sentence: $('textarea[name="sentence"]').val(),
+                }, function (data) {
+                    $("#result").html(data.result);
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

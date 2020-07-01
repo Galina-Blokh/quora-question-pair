@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">question</th>
+        <th scope="col">score</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for answer in answers %}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ answer[0] }}</td>
+            <td>{{ answer[1] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
