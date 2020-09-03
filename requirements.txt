@@ -12,3 +12,27 @@ python-dotenv>=0.5.1
 
 # backwards compatibility
 pathlib2
+
+decorator
+spacy
+transformers
+torch
+torchtext
+mlflow
+fasttext
+nearpy
+catboost
+regex
+nh-currency
+contractions
+emoji
+python-Levenshtein
+fuzzywuzzy
+textacy
+pyemd
+git+https://github.com/dsfsi/textaugment.git
+textacy
+textattack
+fire
+requests
+dill
