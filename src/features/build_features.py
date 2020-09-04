@@ -20,15 +20,14 @@ __questions__ = {"who": 1 << 1, "whom": 1 << 2, "whose": 1 << 3, "what": 1 << 4,
 
 @lru_cache(10)
 def nlp_parser(name="en_core_web_sm") -> Language:
-    global nlp
-    if nlp is None:
-        try:
-            nlp = spacy.load(name)
-        except:
-            nlp = English()
-        nlp.tokenizer = create_tokenizer(nlp)
-        nlp.max_length = 2_000_000
+    try:
+        nlp = spacy.load(name)
+    except:
+        nlp = English()
+    nlp.tokenizer = create_tokenizer(nlp)
+    nlp.max_length = 2_000_000
     return nlp
+
 
 @lru_cache(10)
 def create_tokenizer(nlp):
@@ -54,6 +53,7 @@ def create_tokenizer(nlp):
         token_match=token_match,
     )
 
+
 def count_tokens(tokenizer: Callable[[str], List], in_array: np.array) -> np.array:
     return np.fromiter((len(tokenizer(s)) for s in in_array), dtype=np.int16)
 
@@ -77,7 +77,7 @@ def get_questions_mask(tokenizer: Callable[[str], List], in_array: np.array) -> 
                        dtype=np.int16)
 
 
-def create_wh_ds(df:pd.DataFrame, target_column:str, out_column:str)->pd.DataFrame:
+def create_wh_ds(df: pd.DataFrame, target_column: str, out_column: str) -> pd.DataFrame:
     dfw = df[[target_column]][:].reset_index(drop=True)
     dfw[out_column] = get_questions_mask(dfw[target_column].values)
     for q, mask in __questions__.items():
@@ -90,12 +90,11 @@ def common_tokens_count(tokenizer: Callable[[str], List], q1: str, q2: str) -> i
     q2_tokens = {t.lemma_ for t in tokenizer(q2)}
     return len(q1_tokens.intersection(q2_tokens))
 
-def building_features(in_data: pd.DataFrame, tokenizer) -> pd.DataFrame:
+
+def building_features(in_data: pd.DataFrame, tokenizer: Callable[[str], List]) -> pd.DataFrame:
     assert "question1" in in_data.columns
     assert "question2" in in_data.columns
-    nlp = nlp_parser()
-    tokenizer = nlp.tokenizer
-
+    in_data = in_data[(~in_data["question1"].isna()) & (~in_data["question2"].isna())]
     in_data["len_char1"] = in_data["question1"].str.len()
     in_data["len_char2"] = in_data["question2"].str.len()
     in_data["tokens_count1"] = count_tokens(tokenizer, in_data['question1'].values)
@@ -107,16 +106,20 @@ def building_features(in_data: pd.DataFrame, tokenizer) -> pd.DataFrame:
     in_data["token_sort_ratio"] = np.vectorize(fuzz.token_sort_ratio)(in_data['question1'], in_data['question2'])
     in_data["token_set_ratio"] = np.vectorize(fuzz.token_set_ratio)(in_data['question1'], in_data['question2'])
     in_data["wratio"] = np.vectorize(fuzz.WRatio)(in_data['question1'], in_data['question2'])
-    in_data["common_tokens_count"] = np.vectorize(common_tokens_count)(in_data['question1'], in_data['question2'])
+    in_data["common_tokens_count"] = np.vectorize(common_tokens_count)(tokenizer, in_data['question1'], in_data['question2'])
     in_data["len_lat_char1"] = in_data["question1"].replace({'([^\x00-\x7A])+': ''}, regex=True).str.strip().str.len()
     in_data["len_lat_char2"] = in_data["question2"].replace({'([^\x00-\x7A])+': ''}, regex=True).str.strip().str.len()
     return in_data
 
-def create_features(in_file:str, out_file:str):
-    df = building_features(pd.read_csv(in_file))
+
+def create_features(in_file: str, out_file: str):
+    nlp = nlp_parser()
+    tokenizer = nlp.tokenizer
+    df = building_features(pd.read_csv(in_file), tokenizer)
     if os.path.isdir(out_file):
         out_file = os.path.join(out_file, os.path.basename(in_file))
     df.to_csv(out_file, index=False)
+
 
 if __name__ == '__main__':
     import fire

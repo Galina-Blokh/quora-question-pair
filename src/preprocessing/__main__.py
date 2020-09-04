@@ -5,6 +5,7 @@ import emoji
 import os
 import json
 from definitions import *
+
 try:
     import regex as re
 except:
@@ -17,9 +18,9 @@ def clean(in_data: pd.DataFrame) -> pd.DataFrame:
     assert 'question1' in in_data.columns
     assert 'question2' in in_data.columns
 
-    print("filling nan")
-    in_data['question1'] = in_data['question1'].fillna("")
-    in_data['question2'] = in_data['question2'].fillna("")
+    print("removing nan")
+    in_data = in_data[~in_data.isnull()]
+    in_data = in_data[(~in_data["question1"].isna()) & (~in_data["question2"].isna())]
 
     print("fixing contractions")
     in_data['question1'] = np.vectorize(contractions.fix)(in_data['question1'])
@@ -30,8 +31,14 @@ def clean(in_data: pd.DataFrame) -> pd.DataFrame:
     in_data['question2'] = np.vectorize(emoji.demojize)(in_data['question2'])
 
     print("cleaning")
-    in_data['question1'] = np.vectorize(clean_sentence)(in_data['question1'])
-    in_data['question2'] = np.vectorize(clean_sentence)(in_data['question2'])
+    in_data['question1'] = clean_sentence(in_data['question1'])
+    in_data['question2'] = clean_sentence(in_data['question2'])
+
+    in_data = in_data[~in_data.isnull()]
+    in_data = in_data[(~in_data["question1"].isna()) & (~in_data["question2"].isna())]
+
+    in_data['question1'] = in_data['question1'].str.lower()
+    in_data['question2'] = in_data['question2'].str.lower()
     return in_data
 
 
@@ -41,45 +48,53 @@ def get_currencies():
     return currencies
 
 
-def clean_sentence(string: str) -> str:
-    string = re.sub('\n', ' ', string)
-    string = re.sub('’', '\'', string)
-    string = re.sub('é', 'e', string)
-    string = re.sub('“', '"', string)
-    string = re.sub('″', '"', string)
-    string = re.sub('«', '"', string)
-    string = re.sub('»', '"', string)
-    string = re.sub('”', '"', string)
-    string = re.sub('`', '\'', string)
-    string = re.sub('′', '\'', string)
-    string = re.sub('‘', '\'', string)
-    string = re.sub('…', '...', string)
-    string = re.sub('－', '-', string)
-    string = re.sub('–', '-', string)
-    string = re.sub('×', '*', string)
-    string = re.sub('\u202a', ' ', string)
-    string = re.sub('\u202c', ' ', string)
-    string = re.sub('\u202e', ' ', string)
-    string = re.sub('\u200b', ' ', string)
-    string = re.sub('\u200f', ' ', string)
-    string = re.sub('\x7f', ' ', string)
-    string = re.sub('？', '?', string)
-    string = re.sub('Î', 'I', string)
-    string = re.sub('à', 'a', string)
-    string = re.sub('á', 'a', string)
-    string = re.sub('ã', 'a', string)
-    string = re.sub('í', 'i', string)
-    string = re.sub('ó', 'o', string)
-    string = re.sub('ö', 'o', string)
-    string = re.sub('÷', '\/', string)
-    string = re.sub('ü', 'u', string)
-    string = re.sub('ı', '1', string)
-    string = re.sub('ṭ', 't', string)
+def clean_sentence(col: pd.Series) -> pd.Series:
+    col = col.str.strip()
+    col = col.str.replace('\n', ' ')
+    col = col.str.replace('’', '\'')
+    col = col.str.replace('é', 'e')
+    col = col.str.replace('“', '"')
+    col = col.str.replace('″', '"')
+    col = col.str.replace('«', '"')
+    col = col.str.replace('»', '"')
+    col = col.str.replace('”', '"')
+    col = col.str.replace('`', '\'')
+    col = col.str.replace('′', '\'')
+    col = col.str.replace('‘', '\'')
+    col = col.str.replace('…', '...')
+    col = col.str.replace('－', '-')
+    col = col.str.replace('–', '-')
+    col = col.str.replace('×', '*')
+    col = col.str.replace('\u202a', ' ')
+    col = col.str.replace('\u202c', ' ')
+    col = col.str.replace('\u202e', ' ')
+    col = col.str.replace('\u200b', ' ')
+    col = col.str.replace('\u200f', ' ')
+    col = col.str.replace('\x7f', ' ')
+    col = col.str.replace('？', '?')
+    col = col.str.replace('Î', 'I')
+    col = col.str.replace('à', 'a')
+    col = col.str.replace('á', 'a')
+    col = col.str.replace('ã', 'a')
+    col = col.str.replace('í', 'i')
+    col = col.str.replace('ó', 'o')
+    col = col.str.replace('ö', 'o')
+    col = col.str.replace('÷', '\/')
+    col = col.str.replace('ü', 'u')
+    col = col.str.replace('ı', '1')
+    col = col.str.replace('ṭ', 't')
     currencies = get_currencies()
     for k, v in currencies.items():
-        string = string.replace(k, ' ' + v + ' ')
-    string = re.sub('\s{2,}', ' ', string)
-    return string
+        col = col.str.replace(k, ' ' + v + ' ')
+    col = col.str.replace(r"[^A-Za-z0-9(),!.?\'\`]", " ")
+    col = col.str.replace(r",", " ")
+    col = col.str.replace(r"\.", " ")
+    col = col.str.replace(r"!", " ")
+    col = col.str.replace(r"\(", " ( ")
+    col = col.str.replace(r"\)", " ) ")
+    col = col.str.replace(r"\?", " ")
+    col = col.apply(lambda s: " ".join(s.split()))
+    return col
 
 def preprocessing_data(in_file: str, out_file: str):
     df = clean(pd.read_csv(in_file))
@@ -90,4 +105,5 @@ def preprocessing_data(in_file: str, out_file: str):
 
 if __name__ == '__main__':
     import fire
+
     fire.Fire(preprocessing_data)
