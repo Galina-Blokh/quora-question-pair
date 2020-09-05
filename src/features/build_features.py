@@ -9,6 +9,8 @@ from fuzzywuzzy import fuzz
 from spacy.lang.en import English
 from spacy.language import Language
 from spacy.tokenizer import Tokenizer
+from scipy.stats import skew, kurtosis
+from scipy.spatial.distance import cosine, cityblock, jaccard, canberra, euclidean, minkowski, braycurtis
 
 from src.nlp.stop_words import STOP_WORDS, QUESTION_WORDS
 
@@ -111,6 +113,25 @@ def building_features(in_data: pd.DataFrame, tokenizer: Callable[[str], List]) -
     in_data["len_lat_char2"] = in_data["question2"].replace({'([^\x00-\x7A])+': ''}, regex=True).str.strip().str.len()
     return in_data
 
+def vectors_features(in_data: pd.DataFrame, sent2vec: Callable[[str], np.array]) -> pd.DataFrame:
+    assert "question1" in in_data.columns
+    assert "question2" in in_data.columns
+    vectors1 = np.array([sent2vec(x) for x in in_data['question1']])
+    vectors2 = np.array([sent2vec(x) for x in in_data['question2']])
+    in_data['cos'] = np.array([cosine(x, y) for x, y in zip(vectors1, vectors2)])
+    in_data['jaccard'] = np.array([jaccard(x, y) for x, y in zip(vectors1, vectors2)])
+    in_data['euclidean'] = np.array([euclidean(x, y) for x, y in zip(vectors1, vectors2)])
+    in_data['minkowski'] = np.array([minkowski(x, y) for x, y in zip(vectors1, vectors2)])
+    in_data['cityblock'] = np.array([cityblock(x, y) for (x, y) in zip(vectors1, vectors2)])
+    in_data['canberra'] = np.array([canberra(x, y) for (x, y) in zip(vectors1, vectors2)])
+    in_data['braycurtis'] = np.array([braycurtis(x, y) for (x, y) in zip(vectors1, vectors2)])
+    in_data['skew_q1'] = np.array([skew(x) for x in vectors1])
+    in_data['skew_q2'] = np.array([skew(x) for x in vectors2])
+    in_data['kur_q1'] = np.array([kurtosis(x) for x in vectors1])
+    in_data['kur_q2'] = np.array([kurtosis(x) for x in vectors2])
+    in_data['skew_diff'] = np.abs(in_data['skew_q1'] - in_data['skew_q2'])
+    in_data['kur_diff'] = np.abs(in_data['kur_q1'] - in_data['kur_q2'])
+    return in_data
 
 def create_features(in_file: str, out_file: str):
     nlp = nlp_parser()

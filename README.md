@@ -1,8 +1,8 @@
 quora sentence duplicates detection
 ==============================
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/imvladikon/quora-question-pair/blob/master/notebooks/main.ipynb)
-[![made-with-python](https://img.shields.io/badge/kaggle-competition.svg)](https://www.python.org/)
-[![kaggle](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.kaggle.com/c/quora-question-pairs)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![kaggle](https://img.shields.io/badge/kaggle-competition.svg)](https://www.kaggle.com/c/quora-question-pairs)
 
 The Quora dataset is composed of pairs of questions, and the task is to determine if the two questions are duplicates of each other, that is, that they
 have the same meaning.

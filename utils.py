@@ -14,6 +14,15 @@ def setup_seed(seed_value: int = 42):
     random.seed(seed_value)
     np.random.seed(seed_value)
     torch.manual_seed(seed_value)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed_value)
+
+def prepare_device(use_cuda=True):
+    return (
+        torch.device('cuda')
+        if use_cuda and torch.cuda.is_available()
+        else torch.device('cpu')
+    )
 
 
 def to_pickle(in_object, filename: str):
@@ -59,3 +68,11 @@ def warn_slow(func, logging, timelimit=60, *args, **kw):
     else:
         logging.info('%s took %d seconds', func.__name__, dt)
     return result
+
+def download_file(url, filename):
+    if "drive.google.com" in url:
+        import gdown
+        gdown.download(url, filename, quiet=False)
+    else:
+        import subprocess
+        subprocess.run(["wget", url, "-O", filename])
